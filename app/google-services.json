@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "337382791770",
+    "firebase_url": "https://phototor-e9a5d.firebaseio.com",
+    "project_id": "phototor-e9a5d",
+    "storage_bucket": "phototor-e9a5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337382791770:android:e4e4dbcfcc9711ed9f1663",
+        "android_client_info": {
+          "package_name": "com.example.phototor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337382791770-e4j9q2an4usptm45f9c2kofemlnelvgr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.phototor",
+            "certificate_hash": "c2f504182cd1ee5172da90af883caf9a868476ef"
+          }
+        },
+        {
+          "client_id": "337382791770-oapnco5j8f4avqi80mmckbdvh3dhq923.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMt9YpIynu966i_gsHIDi2XAZL1iLzymg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337382791770-oapnco5j8f4avqi80mmckbdvh3dhq923.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
