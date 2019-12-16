@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "337382791770-l3avgmnqr4qdf0s1i9rl7onfnsa7n0dq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.phototor",
+            "certificate_hash": "a28cfbc68864cdaeffa5dcee0f410dbd623ef574"
+          }
+        },
+        {
           "client_id": "337382791770-e4j9q2an4usptm45f9c2kofemlnelvgr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

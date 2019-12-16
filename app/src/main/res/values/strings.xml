@@ -2,6 +2,10 @@
     <string name="app_name">PhotoTor</string>
     <string name="login">התחברות</string>
     <string name="register">הרשמה</string>
+    <string name="save">שמירה</string>
+    <string name="enterMail">הכנס כתובת מייל</string>
+    <string name="enterPass">הכנס סיסמא</string>
+
 
 
 </resources>
