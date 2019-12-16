@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PhotoTor</string>
+    <string name="login">התחברות</string>
+    <string name="register">הרשמה</string>
+
+
 </resources>
