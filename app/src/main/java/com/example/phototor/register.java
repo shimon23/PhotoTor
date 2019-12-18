@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 import android.content.Context;
 
@@ -18,12 +19,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import androidx.annotation.NonNull;
 
 
+
+
 public class register extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
     Button save;
     EditText editPass;
     EditText editMail;
+    EditText editFirstName;
+    EditText editLastName;
+    EditText editPhoneNum;
+    EditText editCity;
+
+    RadioButton photoRadio;
+    RadioButton clientRadio;
+    String userType = "photographer";
 
 
     @Override
@@ -32,11 +43,17 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_register);
 
         mAuth = FirebaseAuth.getInstance();
-        save =(Button)findViewById(R.id.btnregister);
+        save =(Button)findViewById(R.id.registerBtn);
 
-        editMail = (EditText) findViewById(R.id.editEmail);
+        editMail = (EditText) findViewById(R.id.editMail);
         editPass = (EditText) findViewById(R.id.editPass);
 
+        photoRadio = (RadioButton) findViewById(R.id.radioBtnPhoto);
+        clientRadio = (RadioButton) findViewById(R.id.radioBtnClient);
+        editFirstName = (EditText) findViewById(R.id.editFirstName);
+        editLastName = (EditText) findViewById(R.id.editLastName);
+        editPhoneNum = (EditText) findViewById(R.id.editPhoneNum);
+        editCity = (EditText) findViewById(R.id.editCity);
 
     }
 
@@ -46,13 +63,27 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         String mail = editMail.getText().toString();
         String pass = editPass.getText().toString();
 
+        String fName = editFirstName.getText().toString();
+        String lName = editLastName.getText().toString();
+        String phone = editPhoneNum.getText().toString();
+        String city = editCity.getText().toString();
+
+
 //        //checking if email and passwords are empty
-//        if(TextUtils.isEmpty(email)){
-//            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+//        if(TextUtils.isEmpty(mail)){
+//
+//            Context context = getApplicationContext();
+//            CharSequence text = "Hello toast!";
+//            int duration = Toast.LENGTH_SHORT;
+//
+//            Toast toast = Toast.makeText(context, text, duration);
+//            toast.show();
+//
+////            Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
 //            return;
 //        }
 //
-//        if(TextUtils.isEmpty(password)){
+//        if(TextUtils.isEmpty(pass)){
 //            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
 //            return;
 //        }
@@ -87,6 +118,14 @@ public class register extends AppCompatActivity implements View.OnClickListener 
                     }
                 });
 
+
+        if(userType == "client"){
+            //
+        }
+        else{
+            photographer p = new photographer(fName,lName,mail,phone,city);
+        }
+
     }
 
 
@@ -95,20 +134,34 @@ public class register extends AppCompatActivity implements View.OnClickListener 
 
         if(view==save){
 
-//            String mail = editMail.getText().toString();
-//            String pass = editPass.getText().toString();
-//            Context context = getApplicationContext();
-//            CharSequence text = "Hello toast!";
-//            int duration = Toast.LENGTH_SHORT;
-
-//            Toast toast = Toast.makeText(context, text, duration);
-//            toast.show();
             registerUser();
-
+//            startActivity(new Intent(this, userProfile.class));
+//            finish();
 
         }
 
 
 
     }
+
+    public void radioPhotoClicked(View view)
+    {
+
+        if (photoRadio.isChecked()){
+            clientRadio.setChecked(false);
+            userType = "photographer";
+        }
+
+    }
+
+    public void radioClientClicked(View view)
+    {
+        if (clientRadio.isChecked()){
+            photoRadio.setChecked(false);
+            userType = "client";
+        }
+
+    }
+
+
 }
