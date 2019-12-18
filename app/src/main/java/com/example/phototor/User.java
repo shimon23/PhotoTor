@@ -16,6 +16,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.city = city;
 
+
     }
 
     public void setFirstName(String firstName) {

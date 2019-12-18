@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        if (mAuth.getCurrentUser() == null)
+        if (mAuth.getCurrentUser() != null)
         {
             startActivity(new Intent(this, signInUp.class));
             finish();

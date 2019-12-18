@@ -5,6 +5,13 @@
     <string name="save">שמירה</string>
     <string name="enterMail">הכנס כתובת מייל</string>
     <string name="enterPass">הכנס סיסמא</string>
+    <string name="firstName">שם פרטי</string>
+    <string name="lastName">שם משפחה</string>
+    <string name="phoneNum">מספר טלפון</string>
+    <string name="city">עיר מגורים</string>
+    <string name="exit">יציאה</string>
+    <string name="photographer">צלם</string>
+    <string name="client">לקוח</string>
 
 
 

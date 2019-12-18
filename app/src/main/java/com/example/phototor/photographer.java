@@ -8,16 +8,14 @@ import java.util.Vector;
 
 public class photographer extends User {
 
-    public int lis;
     public final String userType = "photographer";
     //public Vector<String> EventType;
     public HashMap<String, String> EventAndPrice = new HashMap<String, String>();
     public String WebPage=null;
 
-    public photographer(String firstName, String lastName, String email, String phoneNumber, String city, int lis){
+    public photographer(String firstName, String lastName, String email, String phoneNumber, String city){
 
         super(firstName,lastName,email,phoneNumber,city);
-        this.lis = lis;
 
     }
     public void setEventAndPrice(String Event ,String Price){
