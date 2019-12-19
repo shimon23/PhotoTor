@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
 import android.content.Intent;
-
+import android.view.View;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -44,5 +44,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    public void onClick(View view) {
+        Intent intent = new Intent(this, register.class);
+        startActivity(intent);
+    }
 }
