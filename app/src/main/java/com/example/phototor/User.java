@@ -2,14 +2,20 @@ package com.example.phototor;
 
 public class User {
 
+    public String userID;
     public String firstName;
     public String lastName;
     public String email;
     public String phoneNumber;
     public String city;
 
-    public User(String firstName, String lastName, String email, String phoneNumber, String city){
+    public User(){
 
+    }
+
+    public User(String id,String firstName, String lastName, String email, String phoneNumber, String city){
+
+        this.userID = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -60,4 +66,11 @@ public class User {
     }
 
 
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 }

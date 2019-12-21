@@ -16,10 +16,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.FirebaseUser;
+
 import androidx.annotation.NonNull;
-
-
-
 
 public class register extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,6 +34,8 @@ public class register extends AppCompatActivity implements View.OnClickListener 
     RadioButton photoRadio;
     RadioButton clientRadio;
     String userType = "photographer";
+
+    FirebaseDBUser usersDB;
 
 
     @Override
@@ -55,6 +56,8 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         editPhoneNum = (EditText) findViewById(R.id.editPhoneNum);
         editCity = (EditText) findViewById(R.id.editCity);
 
+        usersDB = new FirebaseDBUser();
+
     }
 
     private void registerUser(){
@@ -62,68 +65,59 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         //getting email and password from edit texts
         String mail = editMail.getText().toString();
         String pass = editPass.getText().toString();
-
         String fName = editFirstName.getText().toString();
         String lName = editLastName.getText().toString();
         String phone = editPhoneNum.getText().toString();
         String city = editCity.getText().toString();
 
 
-//        //checking if email and passwords are empty
-//        if(TextUtils.isEmpty(mail)){
-//
-//            Context context = getApplicationContext();
-//            CharSequence text = "Hello toast!";
-//            int duration = Toast.LENGTH_SHORT;
-//
-//            Toast toast = Toast.makeText(context, text, duration);
-//            toast.show();
-//
-////            Toast.makeText(this,"Please enter email",Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        if(TextUtils.isEmpty(pass)){
-//            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
-//            return;
-//        }
 
-        //if the email and password are not empty
-        //displaying a progress dialog
+        if(!mail.isEmpty() && !pass.isEmpty() && !fName.isEmpty() && !lName.isEmpty() && !phone.isEmpty() && !city.isEmpty()) {
+            //creating a new user
+            mAuth.createUserWithEmailAndPassword(mail, pass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
 
-//        progressDialog.setMessage("Registering Please Wait...");
-//        progressDialog.show();
-
-        //creating a new user
-        mAuth.createUserWithEmailAndPassword(mail, pass)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        Context context = getApplicationContext();
-                        CharSequence text = "Hello toast!";
-                        int duration = Toast.LENGTH_SHORT;
-
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                        //checking if success
-//                        if(task.isSuccessful()){
-//                            //display some message here
-//                            Toast.makeText(register.this,"Successfully registered",Toast.LENGTH_LONG).show();
-//                        }else{
-//                            //display some message here
-//                            Toast.makeText(register.this,"Registration Error",Toast.LENGTH_LONG).show();
-
-//                        progressDialog.dismiss();
-                    }
-                });
+                            if(task.isComplete()){
 
 
-        if(userType == "client"){
-            //
-        }
-        else{
-            photographer p = new photographer(fName,lName,mail,phone,city);
+                                if (userType == "client") {
+                                    //
+                                }
+                                else {
+
+
+
+                                    String id = mAuth.getCurrentUser().getUid();
+                                    String fName = editFirstName.getText().toString();
+                                    String lName = editLastName.getText().toString();
+                                    String phone = editPhoneNum.getText().toString();
+                                    String city = editCity.getText().toString();
+                                    String mail = editMail.getText().toString();
+
+                                    usersDB.addUserToDB(id, fName, lName, mail, phone, city, "photographer");
+
+                                    Toast.makeText(getApplicationContext(), id,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            else{
+
+                                Toast.makeText(getApplicationContext(), "התחברת!",
+                                        Toast.LENGTH_SHORT).show();
+
+                            }
+
+
+
+                        }
+                    });
+
+
+
+
         }
 
     }
@@ -135,7 +129,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         if(view==save){
 
             registerUser();
-//            startActivity(new Intent(this, userProfile.class));
+//            startActivity(new Intent(this, photographerMenu.class));
 //            finish();
 
         }
