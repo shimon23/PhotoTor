@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".userProfile"></activity>
-        <activity android:name=".photographerMain" />
+        <activity android:name=".clientMenu"></activity>
+        <activity android:name=".photographerMenu" />
+        <activity android:name=".userProfile" />
         <activity android:name=".register" />
         <activity android:name=".login" />
         <activity android:name=".signInUp" />
