@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PhotoTor</string>
-    
     <string name="login">התחברות</string>
     <string name="register">הרשמה</string>
     <string name="save">שמירה</string>
@@ -13,17 +12,6 @@
     <string name="exit">יציאה</string>
     <string name="photographer">צלם</string>
     <string name="client">לקוח</string>
-    
-    <string-array name="Area">
-        <item>השרון</item>
-        <item>מרכז</item>
-        <item>צפון</item>
-        <item>השומרון</item>
-        <item>ירושלים</item>
-        <item>דרום</item>
-
-
-    </string-array>
 
 
 </resources>
