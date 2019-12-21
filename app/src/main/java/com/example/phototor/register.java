@@ -98,8 +98,6 @@ public class register extends AppCompatActivity implements View.OnClickListener 
 
                                     usersDB.addUserToDB(id, fName, lName, mail, phone, city, "photographer");
 
-                                    Toast.makeText(getApplicationContext(), id,
-                                            Toast.LENGTH_SHORT).show();
                                 }
                             }
 
@@ -129,8 +127,8 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         if(view==save){
 
             registerUser();
-//            startActivity(new Intent(this, photographerMenu.class));
-//            finish();
+            startActivity(new Intent(this, photographerMenu.class));
+            finish();
 
         }
 
