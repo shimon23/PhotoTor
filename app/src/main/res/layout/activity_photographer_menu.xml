@@ -6,36 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".photographerMenu">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="165dp"
-        android:layout_height="92dp"
-        android:layout_marginStart="176dp"
-        android:layout_marginLeft="176dp"
-        android:layout_marginTop="122dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginRight="70dp"
-        android:layout_marginBottom="517dp"
-        android:text="@string/photographer"
+    <Spinner
+        android:id="@+id/Area"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/logOutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginTop="58dp"
-        android:layout_marginEnd="267dp"
-        android:layout_marginRight="267dp"
-        android:layout_marginBottom="625dp"
-        android:onClick="onClick"
-        android:text="@string/exit"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="395dp"
+        android:layout_height="23dp"
+        android:text="באיזה איזור אתה מצלם?"
+        app:layout_constraintBottom_toTopOf="@+id/Area"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
