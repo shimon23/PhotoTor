@@ -1,5 +1,8 @@
 package com.example.phototor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
 
     public String userID;
@@ -8,12 +11,21 @@ public class User {
     public String email;
     public String phoneNumber;
     public String city;
+    public String userType;
 
     public User(){
 
     }
 
-    public User(String id,String firstName, String lastName, String email, String phoneNumber, String city){
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public User(String id, String firstName, String lastName, String email, String phoneNumber, String city){
 
         this.userID = id;
         this.firstName = firstName;
@@ -21,6 +33,7 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.city = city;
+        this.userType = "client";
 
 
     }
@@ -72,5 +85,18 @@ public class User {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("userId", userID);
+        result.put("firstName", firstName);
+        result.put("lastName", lastName);
+        result.put("email", email);
+        result.put("phoneNumber", phoneNumber);
+        result.put("city", city);
+        result.put("userType",userType);
+
+        return result;
     }
 }

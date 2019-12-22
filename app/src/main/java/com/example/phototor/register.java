@@ -75,7 +75,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         progressDialog = new ProgressDialog(register.this,
                 R.style.AppTheme);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage("מבצע רישום..");
         progressDialog.show();
 
         //getting email and password from edit texts
@@ -96,25 +96,34 @@ public class register extends AppCompatActivity implements View.OnClickListener 
 
                             if (task.isComplete()) {
 
+                                String id = mAuth.getCurrentUser().getUid();
+                                String fName = editFirstName.getText().toString();
+                                String lName = editLastName.getText().toString();
+                                String phone = editPhoneNum.getText().toString();
+                                String city = editCity.getText().toString();
+                                String mail = editMail.getText().toString();
+
 
                                 if (userType == "client") {
+
+                                    final Map<String, Object> dataMap = new HashMap<String, Object>();
+                                    User client = new User(id, fName, lName, mail, phone, city);
+                                    dataMap.put(id, client.toMap());
+                                    dbRef.child("users").updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            progressDialog.dismiss();
+                                            next.setClickable(true);
+                                            next.setVisibility(View.VISIBLE);
+                                        }
+                                    });
                                     //
                                 } else {
 
-
-                                    String id = mAuth.getCurrentUser().getUid();
-                                    Toast.makeText(getApplicationContext(), id,
-                                            Toast.LENGTH_SHORT).show();
-                                    String fName = editFirstName.getText().toString();
-                                    String lName = editLastName.getText().toString();
-                                    String phone = editPhoneNum.getText().toString();
-                                    String city = editCity.getText().toString();
-                                    String mail = editMail.getText().toString();
-
                                     final Map<String, Object> dataMap = new HashMap<String, Object>();
                                     photographer userPhoto = new photographer(id, fName, lName, mail, phone, city);
-                                    dataMap.put("user details", userPhoto.toMap());
-                                    dbRef.child("users").child("photographers").child(id).updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    dataMap.put(id, userPhoto.toMap());
+                                    dbRef.child("users").updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             progressDialog.dismiss();
@@ -124,8 +133,8 @@ public class register extends AppCompatActivity implements View.OnClickListener 
                                     });
 
 //                                    usersDB.addUserToDB(id, fName, lName, mail, phone, city, "photographer");
-                                    Toast.makeText(getApplicationContext(), "נרשמת בהצלחה!",
-                                            Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(getApplicationContext(), "נרשמת בהצלחה!",
+//                                            Toast.LENGTH_SHORT).show();
 
                                 }
                             } else {
@@ -157,9 +166,14 @@ public class register extends AppCompatActivity implements View.OnClickListener 
 
         if (view == next) {
 
+            if (userType == "client") {
+                startActivity(new Intent(this, clientMenu.class));
+                finish();
+            }
+            else{
             startActivity(new Intent(this, photographerMenu.class));
             finish();
-
+        }
         }
 
 

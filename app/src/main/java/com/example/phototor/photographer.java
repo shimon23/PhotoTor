@@ -49,17 +49,18 @@ public class photographer extends User {
         this.EventAndPrice.put(Event,NewPrice);
     }
 
+    @Override
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("id", userID);
-        result.put("first name", firstName);
-        result.put("last name", lastName);
+        result.put("userID", userID);
+        result.put("firstName", firstName);
+        result.put("lastName", lastName);
         result.put("email", email);
-        result.put("phone number", phoneNumber);
+        result.put("phoneNumber", phoneNumber);
         result.put("city", city);
-        result.put("user type",userType);
+        result.put("userType",userType);
         result.put("EventAndPrice",EventAndPrice);
-        result.put("user page url",WebPage);
+        result.put("WebPage",WebPage);
 
         return result;
     }
