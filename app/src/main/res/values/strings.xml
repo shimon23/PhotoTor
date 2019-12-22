@@ -12,6 +12,19 @@
     <string name="exit">יציאה</string>
     <string name="photographer">צלם</string>
     <string name="client">לקוח</string>
+    <string name="make_an_order">make_an_order</string>
+    <string name="area">Area</string>
+    <string name="dialog_title">Area Chocsis</string>
+    <string name="ok_label">OK</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">clear all</string>
 
-
+    <string-array name="Area">
+        <item>צפון</item>
+        <item>דרום</item>
+        <item>מרגז</item>
+        <item>שרון</item>
+        <item>שומרון</item>
+        <item>ירושלים</item>
+    </string-array>
 </resources>
