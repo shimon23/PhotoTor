@@ -84,9 +84,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
-
-
         }
 
 
@@ -125,6 +122,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Toast.makeText(getApplicationContext(), "התחברת בהצלחה!",
                                         Toast.LENGTH_SHORT).show();
 
+                                progressDialog = new ProgressDialog(MainActivity.this,
+                                        R.style.AppTheme);
+                                progressDialog.setIndeterminate(true);
+                                progressDialog.setMessage("מזהה משתמש..");
+                                progressDialog.show();
+
+                                getUserType(new MyCallback() {
+                                    @Override
+                                    public void onCallback(String value) {
+                                        Log.d("USER", value);
+                                        startMenu(value);
+                                    }
+                                });
+
                             } else {
                                 Toast.makeText(getApplicationContext(), "ההתחברות נכשלה!",
                                         Toast.LENGTH_SHORT).show();
@@ -145,15 +156,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(view==login){
             login();
 
-            if(mAuth.getCurrentUser() != null){
-
-                Toast.makeText(getApplicationContext(), mAuth.getCurrentUser().getEmail(),
-                        Toast.LENGTH_SHORT).show();
 
 
-                startActivity(new Intent(this, photographerMenu.class));
-                finish();
-            }
+//            if(mAuth.getCurrentUser() != null){
+//
+//                Toast.makeText(getApplicationContext(), mAuth.getCurrentUser().getEmail(),
+//                        Toast.LENGTH_SHORT).show();
+//
+//
+//                startActivity(new Intent(this, photographerMenu.class));
+//                finish();
+//            }
 
 
         }

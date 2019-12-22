@@ -104,7 +104,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
                                 String mail = editMail.getText().toString();
 
 
-                                if (userType == "client") {
+                                if (userType.equals("client")) {
 
                                     final Map<String, Object> dataMap = new HashMap<String, Object>();
                                     User client = new User(id, fName, lName, mail, phone, city);
