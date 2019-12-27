@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class clientMenu extends AppCompatActivity implements View.OnClickListener {
 
     Button logOut;
+    Button photographersList;
 
 
     @Override
@@ -20,6 +21,7 @@ public class clientMenu extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_client_menu);
 
         logOut = (Button)findViewById(R.id.logoutBtn);
+        photographersList = (Button) findViewById(R.id.photographersListBtn);
 
 
 
@@ -34,6 +36,11 @@ public class clientMenu extends AppCompatActivity implements View.OnClickListene
         if(view==logOut){
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+
+        if(view==photographersList){
+            startActivity(new Intent(this, photographersList.class));
             finish();
         }
     }
