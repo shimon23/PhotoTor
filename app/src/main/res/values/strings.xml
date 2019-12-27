@@ -19,11 +19,13 @@
     <string name="dismiss_label">Dismiss</string>
     <string name="clear_all_label">clear all</string>
     <string name="next">next</string>
+    <string name="photographers_search">חיפוש צלם</string>
+    <string name="photographers_list">כל הצלמים</string>
 
     <string-array name="Area">
         <item>צפון</item>
         <item>דרום</item>
-        <item>מרגז</item>
+        <item>מרכז</item>
         <item>שרון</item>
         <item>שומרון</item>
         <item>ירושלים</item>
