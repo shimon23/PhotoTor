@@ -42,23 +42,35 @@ public class photographersList extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                Object fieldsObj = new Object();
-                ArrayList<HashMap<String, Object>> list = new ArrayList<>();
 
-                String userKey = dataSnapshot.getKey();
-                HashMap fldObj = (HashMap)dataSnapshot.getValue(fieldsObj.getClass());
+                try {
+                    Object fieldsObj = new Object();
+                    ArrayList<HashMap<String, Object>> list = new ArrayList<>();
 
-                fldObj.put("recKeyID", dataSnapshot.getKey());
-                list.add(fldObj);
+                    String userKey = dataSnapshot.getKey();
+                    HashMap fldObj = (HashMap)dataSnapshot.getValue(fieldsObj.getClass());
 
-                Log.d("USER-Hash", fldObj.toString());
+                    fldObj.put("recKeyID", dataSnapshot.getKey());
+                    String userType = fldObj.get("userType").toString();
+                    list.add(fldObj);
+
+                    Log.d("USER-Hash", fldObj.toString());
 
 //                str = list.get(0).toString();
-                String value= dataSnapshot.getValue(User.class).toString();
+                    String value= dataSnapshot.getValue(User.class).toString();
 
 //                arrList.add(fldObj.toString());
-                arrList.add(value);
-                arrAdp.notifyDataSetChanged();
+
+                    if(userType.equals("photographer")) {
+                        arrList.add(value);
+                        arrAdp.notifyDataSetChanged();
+                    }
+                }
+                catch (Exception ex){
+
+                }
+
+
 
 
 

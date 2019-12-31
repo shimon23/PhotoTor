@@ -102,12 +102,14 @@ public class User {
 
     public String toString(){
 
-            if(email==null){
-                return "no mail";
-            }
-            else{
-                return email;
-            }
+        try {
+            return this.firstName + " " + this.lastName + ", Phone number: " + this.phoneNumber;
+        }
+        catch (Exception ex){
+            return "null";
+        }
+
+
     }
 
     }

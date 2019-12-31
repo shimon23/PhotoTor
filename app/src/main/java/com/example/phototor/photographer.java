@@ -66,7 +66,7 @@ public class photographer extends User {
     }
 
     public String toString(){
-        return  this.phoneNumber;
+        return  this.firstName + " " + this.lastName + ", Phone number: " + this.phoneNumber;
     }
 
 }

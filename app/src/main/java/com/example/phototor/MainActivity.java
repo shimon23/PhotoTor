@@ -204,8 +204,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     try{
 
                         fldObj = (HashMap)shot.getValue(fieldsObj.getClass());
+                        // Include the primary key of this Firebase data record. Named it 'recKeyID'
+                        fldObj.put("recKeyID", shot.getKey());
+//                    ans = shot.child("user type").getValue().toString();
+                        list.add(fldObj);
+
+                        ans = list.get(0).get("userType").toString();
+                        call.onCallback(ans);
 
                     }catch (Exception ex){
+
+                        progressDialog.dismiss();
 
                         // My custom error handler. See 'ErrorHandler' in Gist
 //                ErrorHandler.logError(ex);
@@ -213,13 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         continue;
                     }
 
-                    // Include the primary key of this Firebase data record. Named it 'recKeyID'
-                    fldObj.put("recKeyID", shot.getKey());
-//                    ans = shot.child("user type").getValue().toString();
-                    list.add(fldObj);
 
-                    ans = list.get(0).get("userType").toString();
-                    call.onCallback(ans);
 
                 }
 
