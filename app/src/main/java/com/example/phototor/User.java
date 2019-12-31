@@ -99,4 +99,15 @@ public class User {
 
         return result;
     }
-}
+
+    public String toString(){
+
+            if(email==null){
+                return "no mail";
+            }
+            else{
+                return email;
+            }
+    }
+
+    }

@@ -65,4 +65,8 @@ public class photographer extends User {
         return result;
     }
 
+    public String toString(){
+        return  this.phoneNumber;
+    }
+
 }
