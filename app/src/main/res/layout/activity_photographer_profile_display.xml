@@ -33,6 +33,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginLeft="52dp"
+            android:layout_marginBottom="122dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView17"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -88,6 +101,21 @@
             android:layout_height="wrap_content"
             android:onClick="onClick"
             android:text="@string/dial" />
+
+        <Button
+            android:id="@+id/websiteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="webSite" />
+
+        <Button
+            android:id="@+id/instaBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="instagram" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

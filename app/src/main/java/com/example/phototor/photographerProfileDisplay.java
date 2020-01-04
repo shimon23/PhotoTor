@@ -2,6 +2,7 @@ package com.example.phototor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
     TextView phone;
     TextView city;
     Button dial;
+    Button webSite;
+    Button instagram;
 
 
     DatabaseReference dbRef;
@@ -45,6 +48,8 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
         mail = (TextView) findViewById(R.id.emailTV);
         city = (TextView) findViewById(R.id.cityTV);
         dial = (Button) findViewById(R.id.dialBtn);
+        webSite = (Button) findViewById(R.id.websiteBtn);
+        instagram = (Button) findViewById(R.id.instaBtn);
 
 
         getUserData(new MyCallback() {
@@ -171,6 +176,26 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" + phone.getText()));
             startActivity(intent);
+        }
+
+        if(view == webSite){
+            Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
+            myWebLink.setData(Uri.parse("http://www.one.co.il"));
+            startActivity(myWebLink);
+        }
+
+        if(view == instagram){
+            Uri uri = Uri.parse("http://instagram.com/_u/ynetgram");
+            Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+
+            likeIng.setPackage("com.instagram.android");
+
+            try {
+                startActivity(likeIng);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://instagram.com/ynetgram")));
+            }
         }
 
     }
