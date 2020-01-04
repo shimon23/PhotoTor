@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,7 @@ public class photographersList extends AppCompatActivity {
     ArrayList <String> arrList= new ArrayList<>();
     ArrayList <String> photographersIDs = new ArrayList<>();
     ArrayAdapter <String> arrAdp;
+    SharedPreferences sp;
 
 
     @Override
@@ -48,11 +50,11 @@ public class photographersList extends AppCompatActivity {
 
                 Log.d("ITEM", Integer.toString(position));
                 Log.d("details", arrList.get(position));
-                Log.d("userID", photographersIDs.get(position));
+                String userID = photographersIDs.get(position);
+                Log.d("userID", userID );
 
+                profileDisplay(userID);
 
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.google.com"));
-//                startActivity(browserIntent);
             }
         });
 
@@ -65,20 +67,14 @@ public class photographersList extends AppCompatActivity {
                     Object fieldsObj = new Object();
                     ArrayList<HashMap<String, Object>> list = new ArrayList<>();
 
-                    String userKey = dataSnapshot.getKey();
                     HashMap fldObj = (HashMap)dataSnapshot.getValue(fieldsObj.getClass());
 
                     fldObj.put("recKeyID", dataSnapshot.getKey());
                     String userType = fldObj.get("userType").toString();
-//                    String userId = fldObj.get("userId").toString();
                     list.add(fldObj);
 
                     Log.d("USER-Hash", fldObj.toString());
-
-//                str = list.get(0).toString();
                     String value= dataSnapshot.getValue(User.class).toString();
-
-//                arrList.add(fldObj.toString());
 
                     if(userType.equals("photographer")) {
                         String userId = fldObj.get("recKeyID").toString();
@@ -118,6 +114,15 @@ public class photographersList extends AppCompatActivity {
         });
 
 
+
+    }
+
+
+    public void profileDisplay(String userId){
+
+        Intent intent=new Intent(this,photographerProfileDisplay.class);
+        intent.putExtra("id", userId);
+        startActivity(intent);
 
     }
 

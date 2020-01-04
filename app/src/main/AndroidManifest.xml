@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".photographersList"></activity>
+        <activity android:name=".photographerProfileDisplay"></activity>
+        <activity android:name=".photographersList" />
         <activity android:name=".activity_tepyofwork" />
         <activity android:name=".activity_area" />
         <activity android:name=".clientMenu" />

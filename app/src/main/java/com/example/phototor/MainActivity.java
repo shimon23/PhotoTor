@@ -158,16 +158,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-//            if(mAuth.getCurrentUser() != null){
-//
-//                Toast.makeText(getApplicationContext(), mAuth.getCurrentUser().getEmail(),
-//                        Toast.LENGTH_SHORT).show();
-//
-//
-//                startActivity(new Intent(this, photographerMenu.class));
-//                finish();
-//            }
-
 
         }
         if(view==register){
