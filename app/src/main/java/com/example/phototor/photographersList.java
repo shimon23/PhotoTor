@@ -28,7 +28,6 @@ public class photographersList extends AppCompatActivity {
     ArrayAdapter <String> arrAdp;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,22 +68,6 @@ public class photographersList extends AppCompatActivity {
                 catch (Exception ex){
 
                 }
-
-
-
-
-
-
-//                for (DataSnapshot shot : dataSnapshot.getChildren()){
-//
-//                    String str = shot.getKey();
-//                    arrList.add(str);
-//                    arrAdp.notifyDataSetChanged();
-//
-//
-//                }
-
-//                String value = dataSnapshot.getValue(photographer.class).toString();
 
 
 

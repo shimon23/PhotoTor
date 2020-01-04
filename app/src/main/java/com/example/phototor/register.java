@@ -86,6 +86,15 @@ public class register extends AppCompatActivity implements View.OnClickListener 
         String phone = editPhoneNum.getText().toString();
         String city = editCity.getText().toString();
 
+        editMail.setEnabled(false);
+        editPass.setEnabled(false);
+        editFirstName.setEnabled(false);
+        editLastName.setEnabled(false);
+        editPhoneNum.setEnabled(false);
+        editCity.setEnabled(false);
+        photoRadio.setEnabled(false);
+        clientRadio.setEnabled(false);
+
 
         if (!mail.isEmpty() && !pass.isEmpty() && !fName.isEmpty() && !lName.isEmpty() && !phone.isEmpty() && !city.isEmpty()) {
             //creating a new user
