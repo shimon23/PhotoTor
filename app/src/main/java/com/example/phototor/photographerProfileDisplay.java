@@ -3,8 +3,11 @@ package com.example.phototor;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,9 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class photographerProfileDisplay extends AppCompatActivity {
+public class photographerProfileDisplay extends AppCompatActivity implements View.OnClickListener {
 
-    TextView tv;
+    TextView name;
+    TextView mail;
+    TextView phone;
+    TextView city;
+    Button dial;
+
 
     DatabaseReference dbRef;
 
@@ -30,11 +38,19 @@ public class photographerProfileDisplay extends AppCompatActivity {
         Intent intent = getIntent();
         String photographerID = intent.getExtras().getString("id");
 
+        HashMap photographerData;
+
+        name = (TextView) findViewById(R.id.nameTV);
+        phone = (TextView) findViewById(R.id.phoneTV);
+        mail = (TextView) findViewById(R.id.emailTV);
+        city = (TextView) findViewById(R.id.cityTV);
+        dial = (Button) findViewById(R.id.dialBtn);
+
 
         getUserData(new MyCallback() {
             @Override
-            public void onCallback(String value) {
-                Log.d("USER", value);
+            public void onCallback(Object value) {
+                Log.d("USER", value.toString());
 //                startMenu(value);
             }
         });
@@ -68,38 +84,72 @@ public class photographerProfileDisplay extends AppCompatActivity {
                 Object fieldsObj = new Object();
                 HashMap fldObj;
 
-//                DataSnapshot ds = dataSnapshot.child(photographerID);
+                DataSnapshot ds = dataSnapshot.child(photographerID);
 
-                for (DataSnapshot shot : dataSnapshot.getChildren()){
+                try{
 
-//                    shot = shot.child(photographerID);
+                    Log.d("photoID", photographerID);
+                    fldObj = (HashMap)ds.getValue(fieldsObj.getClass());
+                    fldObj.put("recKeyID", ds.getKey());
+                    list.add(fldObj);
 
+                    ans = list.get(0).toString();
 
-                    try{
+                    Log.d("userData", fldObj.toString());
 
-                        Log.d("photoID", photographerID);
-                        fldObj = (HashMap)shot.getValue(fieldsObj.getClass());
-                        fldObj.put("recKeyID", shot.getKey());
-                        list.add(fldObj);
-
-                        ans = list.get(0).toString();
-
-                        Log.d("userData", fldObj.toString());
-
-                        tv = (TextView) findViewById(R.id.textView4);
-                        tv.setText("welcome " + fldObj.get("city"));
-
-                        call.onCallback(ans);
-
-                    }catch (Exception ex){
+                    name.setText(fldObj.get("firstName") + " " + fldObj.get("lastName"));
+                    mail.setText(fldObj.get("email").toString());
+                    phone.setText(fldObj.get("phoneNumber").toString());
+                    city.setText(fldObj.get("city").toString());
 
 
-                        continue;
-                    }
 
+//                        tv = (TextView) findViewById(R.id.textView4);
+//                        tv.setText("welcome " + fldObj.get("city"));
 
+                    call.onCallback(ans);
+
+                }catch (Exception ex){
 
                 }
+
+//                for (DataSnapshot shot : dataSnapshot.getChildren()){
+//
+////                    shot = shot.child(photographerID);
+//
+//
+//                    try{
+//
+//                        Log.d("photoID", photographerID);
+//                        fldObj = (HashMap)shot.getValue(fieldsObj.getClass());
+//                        fldObj.put("recKeyID", shot.getKey());
+//                        list.add(fldObj);
+//
+//                        ans = list.get(0).toString();
+//
+//                        Log.d("userData", fldObj.toString());
+//
+//                        name.setText(fldObj.get("firstName") + " " + fldObj.get("lastName"));
+//                        mail.setText(fldObj.get("email").toString());
+//                        phone.setText(fldObj.get("phoneNumber").toString());
+//                        city.setText(fldObj.get("city").toString());
+//
+//
+//
+////                        tv = (TextView) findViewById(R.id.textView4);
+////                        tv.setText("welcome " + fldObj.get("city"));
+//
+//                        call.onCallback(ans);
+//
+//                    }catch (Exception ex){
+//
+//
+//                        continue;
+//                    }
+//
+//
+//
+//                }
 
 
 
@@ -114,6 +164,16 @@ public class photographerProfileDisplay extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View view) {
+
+        if(view == dial){
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + phone.getText()));
+            startActivity(intent);
+        }
+
+    }
 }
 
 

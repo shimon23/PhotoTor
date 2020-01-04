@@ -35,6 +35,7 @@ public class photographersList extends AppCompatActivity {
     SharedPreferences sp;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +81,7 @@ public class photographersList extends AppCompatActivity {
                         String userId = fldObj.get("recKeyID").toString();
                         arrList.add(value);
                         photographersIDs.add(userId);
-                        Collections.sort(arrList);
+//                        Collections.sort(arrList);
                         arrAdp.notifyDataSetChanged();
                     }
                 }

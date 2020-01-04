@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             getUserType(new MyCallback() {
                 @Override
-                public void onCallback(String value) {
-                    Log.d("USER", value);
-                    startMenu(value);
+                public void onCallback(Object value) {
+                    Log.d("USER", value.toString());
+                    startMenu(value.toString());
                 }
             });
 
@@ -130,9 +130,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 getUserType(new MyCallback() {
                                     @Override
-                                    public void onCallback(String value) {
-                                        Log.d("USER", value);
-                                        startMenu(value);
+                                    public void onCallback(Object value) {
+                                        Log.d("USER", value.toString());
+                                        startMenu(value.toString());
                                     }
                                 });
 

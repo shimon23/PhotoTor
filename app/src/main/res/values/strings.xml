@@ -21,6 +21,8 @@
     <string name="next">next</string>
     <string name="photographers_search">חיפוש צלם</string>
     <string name="photographers_list">כל הצלמים</string>
+    <string name="name">שם</string>
+    <string name="dial">חייג</string>
 
     <string-array name="Area">
         <item>צפון</item>
