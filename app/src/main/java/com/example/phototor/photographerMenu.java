@@ -18,6 +18,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+import static com.example.phototor.R.id.bottom;
+import static com.example.phototor.R.id.mangCalendarbtn;
+import static com.example.phototor.R.id.workTypebtn;
+
 public class photographerMenu extends AppCompatActivity  implements  AdapterView.OnItemSelectedListener ,View.OnClickListener {
 
     Button logOut;
@@ -27,6 +31,8 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
     String[] listArea;
     boolean[]checkArea;
     ArrayList<Integer> mSlecterdArea =new ArrayList<>();
+   // Button mangeClendar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,71 +46,30 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
         checkArea = new boolean[listArea.length];
 
         logOut = (Button)findViewById(R.id.logoutBtn);
+        Button mangeClendar =  findViewById(mangCalendarbtn);
+        mangeClendar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), CalendarActivity.class);
+                startActivityForResult(myIntent, 0);
 
-//        Area.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder mbulder = new AlertDialog.Builder(photographerMenu.this);
-//                mbulder.setTitle(getString(R.string.dialog_title));
-//                mbulder.setMultiChoiceItems(listArea, checkArea, new DialogInterface.OnMultiChoiceClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
-//                        if(b){
-//                            if(! mSlecterdArea.contains(i)){
-//                                mSlecterdArea.add(i);
-//                            }else {
-//                                mSlecterdArea.remove(i);
-//                            }
-//                        }
-//                    }
-//                });
-//
-//                mbulder.setCancelable(false);
-//                mbulder.setPositiveButton(getString(R.string.ok_label), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int which) {
-//                        String area ="";
-//                        for(int i=0; i<mSlecterdArea.size();i++) {
-//                            area = area + listArea[mSlecterdArea.get(i)];
-//                            if(i != mSlecterdArea.size()-1){
-//                                area =area +",";
-//                            }
-//
-//                        }
-//                        tvArea.setText(area);
-//                    }
-//                });
-//                mbulder.setNegativeButton(getString(R.string.dismiss_label), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        dialogInterface.dismiss();
-//                    }
-//                });
-//                mbulder.setNeutralButton(getString(R.string.clear_all_label), new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int which) {
-//                        for(int i=0;i<checkArea.length;i++){
-//                            checkArea[i] =false;
-//                            mSlecterdArea.clear();
-//                            tvArea.setText("");
-//                        }
-//                    }
-//                });
-//                AlertDialog mDialog =mbulder.create();
-//                mDialog.show();
-//
-//            }
-//        });
+            }});
+        Button TypeWork = findViewById(workTypebtn);
+        TypeWork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), activity_tepyofwork.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
+        Button area = findViewById(R.id.btnArea);
+        area.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), activity_area.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
 
-
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_photographer_menu);
-//        Spinner spinner = findViewById(R.id.Area);
-//        ArrayAdapter<CharSequence> adapter;
-//        adapter = ArrayAdapter.createFromResource(this, R.array.Area ,R.layout.activity_photographer_menu );
-//        adapter.setDropDownViewResource((R.layout.support_simple_spinner_dropdown_item ));
-//        spinner.setAdapter(adapter);
-////        spinner.setOnItemClickListener((AdapterView.OnItemClickListener) this);
 
 
 
@@ -115,12 +80,17 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
     @Override
     public void onClick(View view) {
 
-        if(view==logOut){
+        if(view==logOut) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
+
+
+
+
     }
+
 
 
 

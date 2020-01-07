@@ -128,7 +128,7 @@ public class register extends AppCompatActivity implements View.OnClickListener 
                                     });
                                     //
                                 } else {
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                     final Map<String, Object> dataMap = new HashMap<String, Object>();
                                     photographer userPhoto = new photographer(id, fName, lName, mail, phone, city);
                                     dataMap.put(id, userPhoto.toMap());
