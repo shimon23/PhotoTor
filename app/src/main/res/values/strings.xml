@@ -23,6 +23,13 @@
     <string name="photographers_list">כל הצלמים</string>
     <string name="name">שם</string>
     <string name="dial">חייג</string>
+    <string name="disconnect">התנתק</string>
+    <string name="mangClendar">ניהול יומן</string>
+    <string name="areaSelect">בחירת אזורי עבודה</string>
+    <string name="eventSelect">בחירת סוגי עבודות</string>
+    <string name="orders">הזמנות</string>
+
+
 
     <string-array name="Area">
         <item>צפון</item>
