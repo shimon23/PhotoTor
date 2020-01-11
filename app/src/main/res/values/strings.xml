@@ -28,6 +28,13 @@
     <string name="areaSelect">בחירת אזורי עבודה</string>
     <string name="eventSelect">בחירת סוגי עבודות</string>
     <string name="orders">הזמנות</string>
+    <string name="notrh">צפון</string>
+    <string name="sharon">שרון</string>
+    <string name="shomron">שומרון</string>
+    <string name="jerusalem">ירושלים</string>
+    <string name="south">דרום</string>
+    <string name="central">מרכז</string>
+
 
 
 
