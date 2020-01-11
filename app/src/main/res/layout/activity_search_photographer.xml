@@ -20,6 +20,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/searchTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/photographers_search"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="130dp" />
+
+        <Spinner
+            android:id="@+id/areasSppiner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/Area" />
+
         <EditText
             android:id="@+id/userText"
             android:layout_width="match_parent"
@@ -29,10 +47,10 @@
             android:text="Name" />
 
         <Button
-            android:id="@+id/sendBtn"
+            android:id="@+id/searchBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClick"
-            android:text="Button" />
+            android:text="@string/search" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
