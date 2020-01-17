@@ -140,9 +140,7 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
                     Log.d("170120-results", intersection.toString());
 
-
-
-                    call.onCallback(areaResults);
+                    call.onCallback(intersection);
 
                 }
                 catch (Exception ex){
@@ -173,7 +171,7 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
 
 
-        intent.putExtra("results", (HashMap)results);
+        intent.putExtra("results", (ArrayList)results);
         intent.putExtra("area", area);
         intent.putExtra("date", orderDate);
         intent.putExtra("time", orderTime);

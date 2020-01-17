@@ -28,9 +28,9 @@ public class searchPhotographersResults extends AppCompatActivity {
         setContentView(R.layout.activity_search_photographers_results);
 
         Intent intent = getIntent();
-        HashMap photographersID = (HashMap<String, String>) intent.getSerializableExtra("results");
+        ArrayList photographersID = (ArrayList) intent.getSerializableExtra("results");
 
-        final List<String> keys = new ArrayList<>(photographersID.keySet());
+        final List<String> keys = new ArrayList<>(photographersID);
 
         Log.d("170120", keys.toString());
 
