@@ -16,7 +16,7 @@
         <activity android:name=".photographerProfileDisplay" />
         <activity android:name=".photographersList" />
         <activity android:name=".CalendarActivity" />
-        <activity android:name=".activity_tepyofwork" />
+        <activity android:name=".activity_typeofwork" />
         <activity android:name=".activity_area" />
         <activity android:name=".clientMenu" />
         <activity android:name=".photographerMenu" />

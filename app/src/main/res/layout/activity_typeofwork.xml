@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="בחר אזורי עבודה"
+            android:text="בחר סוגי אירועים"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -34,41 +34,47 @@
             android:id="@+id/familyChkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/notrh" />
+            android:text="צילומי זוגיות ומשפחה" />
 
         <CheckBox
             android:id="@+id/videoChkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sharon" />
+            android:text="צילום וידאו" />
 
         <CheckBox
             android:id="@+id/objectsChkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/shomron" />
+            android:text="צילום אובייקטים" />
 
         <CheckBox
             android:id="@+id/eventsChkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/jerusalem" />
+            android:text="צילום אירועים" />
 
         <CheckBox
             android:id="@+id/magnetsChkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/south" />
+            android:text="מגנטים לאירועים" />
 
         <CheckBox
             android:id="@+id/studioChkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/central" />
+            android:text="צילומי סטודיו" />
+
+        <CheckBox
+            android:id="@+id/copterChkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="צילומי רחפן" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="319dp" />
+            android:layout_height="293dp" />
 
         <Button
             android:id="@+id/saveBtn"

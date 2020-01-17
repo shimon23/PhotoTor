@@ -21,14 +21,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class activity_area extends AppCompatActivity implements View.OnClickListener {
+public class activity_typeofwork extends AppCompatActivity implements View.OnClickListener {
 
-    CheckBox north;
-    CheckBox sharon;
-    CheckBox shomron;
-    CheckBox jerusalem;
-    CheckBox south;
-    CheckBox central;
+    CheckBox family;
+    CheckBox video;
+    CheckBox objects;
+    CheckBox events;
+    CheckBox magnets;
+    CheckBox studio;
+    CheckBox copter;
     Button save;
 
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
@@ -38,15 +39,16 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_area);
+        setContentView(R.layout.activity_typeofwork);
 
-        north = (CheckBox) findViewById(R.id.familyChkBox);
-        sharon = (CheckBox) findViewById(R.id.videoChkBox);
-        shomron = (CheckBox) findViewById(R.id.objectsChkBox);
-        jerusalem = (CheckBox) findViewById(R.id.eventsChkBox);
-        south = (CheckBox) findViewById(R.id.magnetsChkBox);
-        central = (CheckBox) findViewById(R.id.studioChkBox);
+        family = (CheckBox) findViewById(R.id.familyChkBox);
+        video = (CheckBox) findViewById(R.id.videoChkBox);
+        objects = (CheckBox) findViewById(R.id.objectsChkBox);
+        events = (CheckBox) findViewById(R.id.eventsChkBox);
+        magnets = (CheckBox) findViewById(R.id.magnetsChkBox);
+        studio = (CheckBox) findViewById(R.id.studioChkBox);
         save = (Button) findViewById(R.id.saveBtn);
+        copter = (CheckBox) findViewById(R.id.copterChkBox);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -79,12 +81,13 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
         // onClick for save button
 
         if (view == save) {
-            addOrRemoveArea(north, "צפון");
-            addOrRemoveArea(sharon, "שרון");
-            addOrRemoveArea(shomron, "שומרון");
-            addOrRemoveArea(jerusalem, "ירושלים");
-            addOrRemoveArea(south, "דרום");
-            addOrRemoveArea(central, "מרכז");
+            addOrRemoveType(family, "משפחה");
+            addOrRemoveType(video, "וידאו");
+            addOrRemoveType(objects, "אובייקטים");
+            addOrRemoveType(events, "אירועים");
+            addOrRemoveType(magnets, "מגנטים");
+            addOrRemoveType(studio, "סטודיו");
+            addOrRemoveType(copter, "רחפן");
             updateProfile();
 
             Toast.makeText(getApplicationContext(), "נשמר בהצלחה!",
@@ -95,23 +98,23 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
     }
 
 
-    public void addOrRemoveArea(CheckBox areaBtn, String areaName) {
+    public void addOrRemoveType(CheckBox typeBtn, String typeName) {
         //If the user choose area: add the userID to area child in areas database.
         //Else: remove the userID from area child in areas database.
 
         String userID = mAuth.getUid();
 
-        if (areaBtn.isChecked()) {
+        if (typeBtn.isChecked()) {
             final Map<String, Object> dataMap = new HashMap<String, Object>();
             dataMap.put(userID, "yes");
-            dbRef.child("areas").child(areaName).updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            dbRef.child("workTypes").child(typeName).updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
 
                 }
             });
-        } else if (areaBtn.isChecked() == false) {
-            dbRef.child("areas").child(areaName).child(userID).removeValue();
+        } else if (typeBtn.isChecked() == false) {
+            dbRef.child("workTypes").child(typeName).child(userID).removeValue();
         }
 
 
@@ -123,15 +126,16 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
         Map<String, Object> dataMap = new HashMap<String, Object>();
         String userID = mAuth.getUid();
 
-        dataMap = updateAreasMap(dataMap, north, "צפון");
-        dataMap = updateAreasMap(dataMap, sharon, "שרון");
-        dataMap = updateAreasMap(dataMap, shomron, "שומרון");
-        dataMap = updateAreasMap(dataMap, jerusalem, "ירושלים");
-        dataMap = updateAreasMap(dataMap, south, "דרום");
-        dataMap = updateAreasMap(dataMap, central, "מרכז");
+        dataMap = updateAreasMap(dataMap, family, "משפחה");
+        dataMap = updateAreasMap(dataMap, video, "וידאו");
+        dataMap = updateAreasMap(dataMap, objects, "אובייקטים");
+        dataMap = updateAreasMap(dataMap, events, "אירועים");
+        dataMap = updateAreasMap(dataMap, magnets, "מגנטים");
+        dataMap = updateAreasMap(dataMap, studio, "סטודיו");
+        dataMap = updateAreasMap(dataMap, copter, "רחפן");
 
 
-        dbRef.child("users").child(userID).child("myAreas").updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+        dbRef.child("users").child(userID).child("myWorkTypes").updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
 
@@ -183,11 +187,11 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
 //                    ans = shot.child("user type").getValue().toString();
                         list.add(fldObj);
 
-                        ans = list.get(0).get("myAreas").toString();
+                        ans = list.get(0).get("myWorkTypes").toString();
 
-                        Log.d("areas", ans);
+                        Log.d("types", ans);
 
-                        call.onCallback(fldObj.get("myAreas"));
+                        call.onCallback(fldObj.get("myWorkTypes"));
 
                     } catch (Exception ex) {
 
@@ -209,31 +213,35 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
     }
 
 
-    public void checkBoxOn(String areaName) {
+    public void checkBoxOn(String typeName) {
         //Set checkBox on, by user profile data.
 
-        if (areaName.equals("north")) {
-            north.setChecked(true);
+        if (typeName.equals("משפחה")) {
+            family.setChecked(true);
         }
 
-        if (areaName.equals("sharon")) {
-            sharon.setChecked(true);
+        if (typeName.equals("וידאו")) {
+            video.setChecked(true);
         }
 
-        if (areaName.equals("shomron")) {
-            shomron.setChecked(true);
+        if (typeName.equals("אובייקטים")) {
+            objects.setChecked(true);
         }
-        if (areaName.equals("jerusalem")) {
-            jerusalem.setChecked(true);
+        if (typeName.equals("אירועים")) {
+            events.setChecked(true);
         }
-        if (areaName.equals("south")) {
-            south.setChecked(true);
+        if (typeName.equals("מגנטים")) {
+            magnets.setChecked(true);
         }
-        if (areaName.equals("central")) {
-            central.setChecked(true);
+        if (typeName.equals("סטודיו")) {
+            studio.setChecked(true);
+        }
+        if (typeName.equals("רחפן")) {
+            copter.setChecked(true);
         }
 
     }
 
 }
+
 

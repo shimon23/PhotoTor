@@ -22,8 +22,7 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
     TextView tvArea;
     String[] listArea;
     boolean[]checkArea;
-    ArrayList<Integer> mSlecterdArea =new ArrayList<>();
-   // Button mangeClendar;
+//    ArrayList<Integer> mSlecterdArea =new ArrayList<>();
 
 
     @Override
@@ -31,7 +30,6 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photographer_menu);
         Area = (Button) findViewById(R.id.btnArea);
-//        tvArea = (TextView) findViewById(R.id.tvAreaSelected);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -50,7 +48,7 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
         TypeWork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), activity_tepyofwork.class);
+                Intent myIntent = new Intent(view.getContext(), activity_typeofwork.class);
                 startActivityForResult(myIntent, 0);
             }
         });
