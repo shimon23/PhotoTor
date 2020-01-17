@@ -79,12 +79,12 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
         // onClick for save button
 
         if (view == save) {
-            addOrRemoveArea(north, "north");
-            addOrRemoveArea(sharon, "sharon");
-            addOrRemoveArea(shomron, "shomron");
-            addOrRemoveArea(jerusalem, "jerusalem");
-            addOrRemoveArea(south, "south");
-            addOrRemoveArea(central, "central");
+            addOrRemoveArea(north, "צפון");
+            addOrRemoveArea(sharon, "שרון");
+            addOrRemoveArea(shomron, "שומרון");
+            addOrRemoveArea(jerusalem, "ירושלים");
+            addOrRemoveArea(south, "דרום");
+            addOrRemoveArea(central, "מרכז");
             updateProfile();
 
             Toast.makeText(getApplicationContext(), "נשמר בהצלחה!",
@@ -123,12 +123,12 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
         Map<String, Object> dataMap = new HashMap<String, Object>();
         String userID = mAuth.getUid();
 
-        dataMap = updateAreasMap(dataMap, north, "north");
-        dataMap = updateAreasMap(dataMap, sharon, "sharon");
-        dataMap = updateAreasMap(dataMap, shomron, "shomron");
-        dataMap = updateAreasMap(dataMap, jerusalem, "jerusalem");
-        dataMap = updateAreasMap(dataMap, south, "south");
-        dataMap = updateAreasMap(dataMap, central, "central");
+        dataMap = updateAreasMap(dataMap, north, "צפון");
+        dataMap = updateAreasMap(dataMap, sharon, "שרון");
+        dataMap = updateAreasMap(dataMap, shomron, "שומרון");
+        dataMap = updateAreasMap(dataMap, jerusalem, "ירושלים");
+        dataMap = updateAreasMap(dataMap, south, "דרום");
+        dataMap = updateAreasMap(dataMap, central, "מרכז");
 
 
         dbRef.child("users").child(userID).child("myAreas").updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -20,7 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -41,7 +40,7 @@ public class photographersList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photographers_list);
         dbRef = FirebaseDatabase.getInstance().getReference("users");
-        list = (ListView) findViewById(R.id.listView);
+        list = (ListView) findViewById(R.id.listView10);
         arrAdp= new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,arrList);
         list.setAdapter(arrAdp);
 
@@ -81,7 +80,6 @@ public class photographersList extends AppCompatActivity {
                         String userId = fldObj.get("recKeyID").toString();
                         arrList.add(value);
                         photographersIDs.add(userId);
-//                        Collections.sort(arrList);
                         arrAdp.notifyDataSetChanged();
                     }
                 }

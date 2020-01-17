@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +38,6 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_search_photographer);
 
         send = (Button) findViewById(R.id.searchBtn);
-        userName = (EditText) findViewById(R.id.userText);
         areas = (Spinner) findViewById(R.id.areasSppiner);
     }
 
@@ -47,19 +48,16 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
             String area = areas.getSelectedItem().toString();
             Log.d("SEARCH!", area);
-            findTest("areas",area);
-//
-//            final Map<String, Object> dataMap = new HashMap<String, Object>();
-//            dataMap.put("netanel", "hugi");
-//
-//            dbRef.child("orders").updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                @Override
-//                public void onSuccess(Void aVoid) {
-////                    progressDialog.dismiss();
-////                    next.setClickable(true);
-////                    next.setVisibility(View.VISIBLE);
-//                }
-//            });
+            searchPhotographer(new MyCallback() {
+                @Override
+                public void onCallback(Object value) {
+
+
+
+//                    Log.d("170120", value.toString());
+                    displayResults(value);
+                }
+            } ,area);
 
 
         }
@@ -69,55 +67,33 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
     }
 
 
-    public void findTest(final String dbName, final String op){
+    public void searchPhotographer(final MyCallback call, final String area){
 
-        dbRef = FirebaseDatabase.getInstance().getReference(dbName);
+        dbRef = FirebaseDatabase.getInstance().getReference("areas");
 
-        dbRef.addChildEventListener(new ChildEventListener() {
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
                 try {
 
                     Object fieldsObj = new Object();
                     ArrayList<HashMap<String, Object>> list = new ArrayList<>();
                     HashMap fldObj = (HashMap)dataSnapshot.getValue(fieldsObj.getClass());
+                    HashMap areaResults =(HashMap)fldObj.get(area);
 
-                    Log.d("findTest", fldObj.toString());
 
-//
-//                    fldObj.put("recKeyID", dataSnapshot.getKey());
-//                    String userType = fldObj.get(op).toString();
-//                    list.add(fldObj);
-//
-//                    Log.d("USER-Hash", fldObj.toString());
-//                    String value= dataSnapshot.getValue(User.class).toString();
-//
-//                    if(userType.equals("photographer")) {
-//                        String userId = fldObj.get("recKeyID").toString();
-//                    }
+
+
+
+
+                    call.onCallback(areaResults);
+
                 }
                 catch (Exception ex){
 
                 }
 
-
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             }
 
@@ -125,7 +101,26 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
         });
 
     }
+
+    public void displayResults(Object results){
+
+        Intent intent=new Intent(this,searchPhotographersResults.class);
+        String area = areas.getSelectedItem().toString();
+
+        intent.putExtra("results", (HashMap)results);
+        intent.putExtra("area", area);
+        startActivity(intent);
+
+    }
+
+
+
+
+
+
+
 }

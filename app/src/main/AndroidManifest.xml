@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.phototor">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".searchPhotographer"/>
-        <activity android:name=".photographerProfileDisplay"></activity>
+        <activity android:name=".searchPhotographersResults"></activity>
+        <activity android:name=".searchPhotographer" />
+        <activity android:name=".photographerProfileDisplay" />
         <activity android:name=".photographersList" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".activity_tepyofwork" />
@@ -19,7 +22,6 @@
         <activity android:name=".photographerMenu" />
         <activity android:name=".register" />
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,8 +29,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-
 
 </manifest>
