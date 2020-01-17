@@ -46,6 +46,17 @@
         <item>שומרון</item>
         <item>ירושלים</item>
     </string-array>
+
+    <string-array name="eventsTypes">
+        <item>צילומי זוגיות ומשפחה</item>
+        <item>צילום וידאו</item>
+        <item>צילום אובייקטים</item>
+        <item>צילום אירועים</item>
+        <item>מגנטים לאירועים</item>
+        <item>צילומי סטודיו</item>
+        <item>צילומי רחפן</item>
+    </string-array>
+
     <string name="title_activity__photo_rigister">Settings</string>
 
     <!-- Preference Titles -->

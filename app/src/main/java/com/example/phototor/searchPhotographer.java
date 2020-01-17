@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.android.gms.common.util.CollectionUtils;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class searchPhotographer extends AppCompatActivity implements View.OnClickListener {
@@ -31,6 +34,7 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
     EditText userName;
     Spinner areas;
+    Spinner eventsTypes;
 
     EditText date;
     EditText time;
@@ -47,6 +51,7 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
         send = (Button) findViewById(R.id.searchBtn);
         areas = (Spinner) findViewById(R.id.areasSppiner);
+        eventsTypes = (Spinner) findViewById(R.id.workTypeSppiner);
         orderDetails = (Button) findViewById(R.id.orderDetails);
         date = (EditText) findViewById(R.id.dateET);
         time = (EditText) findViewById(R.id.startTimeET);
@@ -62,17 +67,20 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
         if(view == send){
 
             String area = areas.getSelectedItem().toString();
-            Log.d("SEARCH!", area);
+            String type = eventsTypes.getSelectedItem().toString();
+
+            Log.d("170120", area);
+            Log.d("170120", type);
+
+
             searchPhotographer(new MyCallback() {
                 @Override
                 public void onCallback(Object value) {
+                    Log.d("170120", "test");
 
-
-
-//                    Log.d("170120", value.toString());
                     displayResults(value);
                 }
-            } ,area);
+            } ,area,type);
 
 
         }
@@ -106,9 +114,10 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
     }
 
 
-    public void searchPhotographer(final MyCallback call, final String area){
+    public void searchPhotographer(final MyCallback call, final String area, final String eventType){
 
-        dbRef = FirebaseDatabase.getInstance().getReference("areas");
+        dbRef = FirebaseDatabase.getInstance().getReference();
+
 
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -116,13 +125,20 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
                 try {
 
-                    Object fieldsObj = new Object();
-                    ArrayList<HashMap<String, Object>> list = new ArrayList<>();
-                    HashMap fldObj = (HashMap)dataSnapshot.getValue(fieldsObj.getClass());
-                    HashMap areaResults =(HashMap)fldObj.get(area);
+                    Object fieldsObjArea = new Object();
+                    HashMap fldObjArea = (HashMap)dataSnapshot.getValue(fieldsObjArea.getClass());
+                    HashMap areaResults =(HashMap)((HashMap)fldObjArea.get("areas")).get(area);
+                    Log.d("170120-area", areaResults.toString());
 
+                    Object fieldsObjEvent = new Object();
+                    HashMap fldObjEvent = (HashMap)dataSnapshot.getValue(fieldsObjEvent.getClass());
+                    HashMap eventResults =(HashMap)((HashMap)fldObjArea.get("workTypes")).get(eventType);
+                    Log.d("170120-event", eventResults.toString());
 
+                    List<String> intersection = new ArrayList(areaResults.keySet());
+                    intersection.retainAll(eventResults.keySet());
 
+                    Log.d("170120-results", intersection.toString());
 
 
 
@@ -130,6 +146,7 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
                 }
                 catch (Exception ex){
+                    Log.d("170120", "error");
 
                 }
 

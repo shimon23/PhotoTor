@@ -24,6 +24,7 @@
             android:id="@+id/searchTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/photographers_search"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -41,7 +42,8 @@
         <Spinner
             android:id="@+id/workTypeSppiner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:entries="@array/eventsTypes" />
 
         <Button
             android:id="@+id/searchBtn"

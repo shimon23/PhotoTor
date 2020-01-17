@@ -212,24 +212,24 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
     public void checkBoxOn(String areaName) {
         //Set checkBox on, by user profile data.
 
-        if (areaName.equals("north")) {
+        if (areaName.equals("צפון")) {
             north.setChecked(true);
         }
 
-        if (areaName.equals("sharon")) {
+        if (areaName.equals("שרון")) {
             sharon.setChecked(true);
         }
 
-        if (areaName.equals("shomron")) {
+        if (areaName.equals("שומרון")) {
             shomron.setChecked(true);
         }
-        if (areaName.equals("jerusalem")) {
+        if (areaName.equals("ירושלים")) {
             jerusalem.setChecked(true);
         }
-        if (areaName.equals("south")) {
+        if (areaName.equals("דרום")) {
             south.setChecked(true);
         }
-        if (areaName.equals("central")) {
+        if (areaName.equals("מרכז")) {
             central.setChecked(true);
         }
 

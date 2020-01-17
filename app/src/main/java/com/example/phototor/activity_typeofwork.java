@@ -81,13 +81,13 @@ public class activity_typeofwork extends AppCompatActivity implements View.OnCli
         // onClick for save button
 
         if (view == save) {
-            addOrRemoveType(family, "משפחה");
-            addOrRemoveType(video, "וידאו");
-            addOrRemoveType(objects, "אובייקטים");
-            addOrRemoveType(events, "אירועים");
-            addOrRemoveType(magnets, "מגנטים");
-            addOrRemoveType(studio, "סטודיו");
-            addOrRemoveType(copter, "רחפן");
+            addOrRemoveType(family, "צילומי זוגיות ומשפחה");
+            addOrRemoveType(video, "צילומי וידאו");
+            addOrRemoveType(objects, "צילום אובייקטים");
+            addOrRemoveType(events, "צילום אירועים");
+            addOrRemoveType(magnets, "מגנטים לאירועים");
+            addOrRemoveType(studio, "צילומי סטודיו");
+            addOrRemoveType(copter, "צילומי רחפן");
             updateProfile();
 
             Toast.makeText(getApplicationContext(), "נשמר בהצלחה!",
@@ -126,13 +126,13 @@ public class activity_typeofwork extends AppCompatActivity implements View.OnCli
         Map<String, Object> dataMap = new HashMap<String, Object>();
         String userID = mAuth.getUid();
 
-        dataMap = updateAreasMap(dataMap, family, "משפחה");
-        dataMap = updateAreasMap(dataMap, video, "וידאו");
-        dataMap = updateAreasMap(dataMap, objects, "אובייקטים");
-        dataMap = updateAreasMap(dataMap, events, "אירועים");
-        dataMap = updateAreasMap(dataMap, magnets, "מגנטים");
-        dataMap = updateAreasMap(dataMap, studio, "סטודיו");
-        dataMap = updateAreasMap(dataMap, copter, "רחפן");
+        dataMap = updateAreasMap(dataMap, family, "צילומי זוגיות ומשפחה");
+        dataMap = updateAreasMap(dataMap, video, "צילומי וידאו");
+        dataMap = updateAreasMap(dataMap, objects, "צילום אובייקטים");
+        dataMap = updateAreasMap(dataMap, events, "צילום אירועים");
+        dataMap = updateAreasMap(dataMap, magnets, "מגנטים לאירועים");
+        dataMap = updateAreasMap(dataMap, studio, "צילומי סטודיו");
+        dataMap = updateAreasMap(dataMap, copter, "צילומי רחפן");
 
 
         dbRef.child("users").child(userID).child("myWorkTypes").updateChildren(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -216,27 +216,27 @@ public class activity_typeofwork extends AppCompatActivity implements View.OnCli
     public void checkBoxOn(String typeName) {
         //Set checkBox on, by user profile data.
 
-        if (typeName.equals("משפחה")) {
+        if (typeName.equals("צילומי זוגיות ומשפחה")) {
             family.setChecked(true);
         }
 
-        if (typeName.equals("וידאו")) {
+        if (typeName.equals("צילומי וידאו")) {
             video.setChecked(true);
         }
 
-        if (typeName.equals("אובייקטים")) {
+        if (typeName.equals("צילום אובייקטים")) {
             objects.setChecked(true);
         }
-        if (typeName.equals("אירועים")) {
+        if (typeName.equals("צילום אירועים")) {
             events.setChecked(true);
         }
-        if (typeName.equals("מגנטים")) {
+        if (typeName.equals("מגנטים לאירועים")) {
             magnets.setChecked(true);
         }
-        if (typeName.equals("סטודיו")) {
+        if (typeName.equals("צילומי סטודיו")) {
             studio.setChecked(true);
         }
-        if (typeName.equals("רחפן")) {
+        if (typeName.equals("צילומי רחפן")) {
             copter.setChecked(true);
         }
 
