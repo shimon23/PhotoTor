@@ -27,9 +27,17 @@ import java.util.Map;
 public class searchPhotographer extends AppCompatActivity implements View.OnClickListener {
 
     Button send;
+    Button orderDetails;
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
     EditText userName;
     Spinner areas;
+
+    EditText date;
+    EditText time;
+    EditText place;
+    EditText notes;
+    Button confrim;
+
 
 
     @Override
@@ -39,6 +47,13 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
         send = (Button) findViewById(R.id.searchBtn);
         areas = (Spinner) findViewById(R.id.areasSppiner);
+        orderDetails = (Button) findViewById(R.id.orderDetails);
+        date = (EditText) findViewById(R.id.dateET);
+        time = (EditText) findViewById(R.id.startTimeET);
+        notes = (EditText) findViewById(R.id.notesET);
+        confrim = (Button) findViewById(R.id.confrimBtn);
+        place = (EditText) findViewById(R.id.locationET);
+
     }
 
     @Override
@@ -61,6 +76,30 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
 
         }
+
+        if(view == orderDetails ){
+
+            date.setVisibility(View.VISIBLE);
+            time.setVisibility(View.VISIBLE);
+            notes.setVisibility(View.VISIBLE);
+            confrim.setVisibility(View.VISIBLE);
+            place.setVisibility(View.VISIBLE);
+
+        }
+
+
+        if(view == confrim ){
+
+            date.setEnabled(false);
+            time.setEnabled(false);
+            notes.setEnabled(false);
+            confrim.setEnabled(false);
+            place.setEnabled(false);
+
+        }
+
+
+
 
 
 
@@ -110,9 +149,19 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
         Intent intent=new Intent(this,searchPhotographersResults.class);
         String area = areas.getSelectedItem().toString();
+        String orderDate = date.getText().toString();
+        String orderTime = time.getText().toString();
+        String orderLocation = place.getText().toString();
+        String orderNotes = notes.getText().toString();
+
+
 
         intent.putExtra("results", (HashMap)results);
         intent.putExtra("area", area);
+        intent.putExtra("date", orderDate);
+        intent.putExtra("time", orderTime);
+        intent.putExtra("location", orderLocation);
+        intent.putExtra("notes", orderNotes);
         startActivity(intent);
 
     }

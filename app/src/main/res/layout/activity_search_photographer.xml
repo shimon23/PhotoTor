@@ -30,7 +30,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="130dp" />
+            android:layout_height="23dp" />
 
         <Spinner
             android:id="@+id/areasSppiner"
@@ -43,16 +43,65 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <Spinner
-            android:id="@+id/dateSppiner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <Button
             android:id="@+id/searchBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClick"
             android:text="@string/search" />
+
+        <Button
+            android:id="@+id/orderDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="הכנס פרטי הזמנה" />
+
+        <EditText
+            android:id="@+id/dateET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:editable="true"
+            android:ems="10"
+            android:hint="תאריך האירוע"
+            android:inputType="date"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/startTimeET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="שעת התחלה"
+            android:inputType="time"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/locationET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="מקום האירוע"
+            android:inputType="textPersonName"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/notesET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="הערות"
+            android:inputType="textPersonName"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/confrimBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="אישור"
+            android:visibility="invisible" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

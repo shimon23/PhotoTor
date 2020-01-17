@@ -38,17 +38,14 @@ public class clientMenu extends AppCompatActivity implements View.OnClickListene
         if(view==logOut){
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, MainActivity.class));
-            finish();
         }
 
         if(view==photographersList){
             startActivity(new Intent(this, photographersList.class));
-            finish();
         }
 
         if(view == search ){
             startActivity(new Intent(this, searchPhotographer.class));
-            finish();
         }
     }
 }
