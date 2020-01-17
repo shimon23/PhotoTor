@@ -29,7 +29,15 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
     Button dial;
     Button webSite;
     Button instagram;
+    Button getBid;
 
+    String area;
+    String date;
+    String time;
+    String location;
+    String notes;
+    String photographerID;
+    int eventid;
 
     DatabaseReference dbRef;
 
@@ -39,7 +47,17 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
         setContentView(R.layout.activity_photographer_profile_display);
 
         Intent intent = getIntent();
-        String photographerID = intent.getExtras().getString("id");
+        photographerID = intent.getExtras().getString("id");
+        area = intent.getExtras().getString("area");
+        date = intent.getExtras().getString("date");
+        time = intent.getExtras().getString("time");
+        location = intent.getExtras().getString("location");
+        notes = intent.getExtras().getString("notes");
+        eventid = intent.getExtras().getInt("eventid");
+
+        Log.d("170120-netanel", Integer.toString(eventid));
+
+
 
         HashMap photographerData;
 
@@ -50,6 +68,7 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
         dial = (Button) findViewById(R.id.dialBtn);
         webSite = (Button) findViewById(R.id.websiteBtn);
         instagram = (Button) findViewById(R.id.instaBtn);
+        getBid = (Button) findViewById(R.id.bidBtn);
 
 
         getUserData(new MyCallback() {
@@ -118,48 +137,6 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
 
                 }
 
-//                for (DataSnapshot shot : dataSnapshot.getChildren()){
-//
-////                    shot = shot.child(photographerID);
-//
-//
-//                    try{
-//
-//                        Log.d("photoID", photographerID);
-//                        fldObj = (HashMap)shot.getValue(fieldsObj.getClass());
-//                        fldObj.put("recKeyID", shot.getKey());
-//                        list.add(fldObj);
-//
-//                        ans = list.get(0).toString();
-//
-//                        Log.d("userData", fldObj.toString());
-//
-//                        name.setText(fldObj.get("firstName") + " " + fldObj.get("lastName"));
-//                        mail.setText(fldObj.get("email").toString());
-//                        phone.setText(fldObj.get("phoneNumber").toString());
-//                        city.setText(fldObj.get("city").toString());
-//
-//
-//
-////                        tv = (TextView) findViewById(R.id.textView4);
-////                        tv.setText("welcome " + fldObj.get("city"));
-//
-//                        call.onCallback(ans);
-//
-//                    }catch (Exception ex){
-//
-//
-//                        continue;
-//                    }
-//
-//
-//
-//                }
-
-
-
-//                String value = dataSnapshot.getValue(String.class);
-//                call.onCallback(value);
             }
 
             @Override
@@ -196,6 +173,21 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://instagram.com/ynetgram")));
             }
+        }
+
+        if(view == getBid){
+
+            Intent intent = new Intent(this, getBid.class);
+            intent.putExtra("id", photographerID);
+            intent.putExtra("area", area);
+            intent.putExtra("date", date);
+            intent.putExtra("time", time);
+            intent.putExtra("location", location);
+            intent.putExtra("notes", notes);
+            intent.putExtra("eventid", eventid);
+
+            startActivity(intent);
+
         }
 
     }

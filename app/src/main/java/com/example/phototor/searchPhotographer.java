@@ -168,6 +168,8 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
         String orderTime = time.getText().toString();
         String orderLocation = place.getText().toString();
         String orderNotes = notes.getText().toString();
+        int eventType = eventsTypes.getSelectedItemPosition();
+
 
 
 
@@ -177,6 +179,7 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
         intent.putExtra("time", orderTime);
         intent.putExtra("location", orderLocation);
         intent.putExtra("notes", orderNotes);
+        intent.putExtra("eventid", eventType);
         startActivity(intent);
 
     }

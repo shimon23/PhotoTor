@@ -20,7 +20,13 @@ import java.util.List;
 public class searchPhotographersResults extends AppCompatActivity {
 
     ListView lv;
-    ArrayAdapter <String> arrAdp;
+    ArrayAdapter<String> arrAdp;
+    String area;
+    String date;
+    String time;
+    String location;
+    String notes;
+    int eventid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +35,18 @@ public class searchPhotographersResults extends AppCompatActivity {
 
         Intent intent = getIntent();
         ArrayList photographersID = (ArrayList) intent.getSerializableExtra("results");
+        area = intent.getExtras().getString("area");
+        date = intent.getExtras().getString("date");
+        time = intent.getExtras().getString("time");
+        location = intent.getExtras().getString("location");
+        notes = intent.getExtras().getString("notes");
+        eventid = intent.getExtras().getInt("eventid");
+
+
 
         final List<String> keys = new ArrayList<>(photographersID);
 
-        Log.d("170120", keys.toString());
-
-        arrAdp= new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,keys);
+        arrAdp = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, keys);
         lv = (ListView) findViewById(R.id.listView10);
         lv.setAdapter(arrAdp);
 
@@ -45,7 +57,7 @@ public class searchPhotographersResults extends AppCompatActivity {
                 Log.d("ITEM", Integer.toString(position));
                 Log.d("details", keys.get(position));
                 String userID = keys.get(position);
-                Log.d("userID", userID );
+                Log.d("userID", userID);
 
                 profileDisplay(userID);
 
@@ -53,13 +65,19 @@ public class searchPhotographersResults extends AppCompatActivity {
         });
 
 
-
     }
 
-    public void profileDisplay(String userId){
+    public void profileDisplay(String userId) {
 
-        Intent intent=new Intent(this,photographerProfileDisplay.class);
+        Intent intent = new Intent(this, photographerProfileDisplay.class);
         intent.putExtra("id", userId);
+        intent.putExtra("area", area);
+        intent.putExtra("date", date);
+        intent.putExtra("time", time);
+        intent.putExtra("location", location);
+        intent.putExtra("notes", notes);
+        intent.putExtra("eventid", eventid);
+
         startActivity(intent);
 
     }
