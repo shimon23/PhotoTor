@@ -6,4 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".incomingOrders">
 
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="601dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/myOrdersTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ההזמנות שלי"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <ListView
+            android:id="@+id/myOrdersLV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

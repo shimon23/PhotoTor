@@ -31,8 +31,6 @@ public class photographersList extends AppCompatActivity {
     ArrayList <String> arrList= new ArrayList<>();
     ArrayList <String> photographersIDs = new ArrayList<>();
     ArrayAdapter <String> arrAdp;
-    SharedPreferences sp;
-
 
 
     @Override
@@ -71,16 +69,21 @@ public class photographersList extends AppCompatActivity {
 
                     fldObj.put("recKeyID", dataSnapshot.getKey());
                     String userType = fldObj.get("userType").toString();
+
                     list.add(fldObj);
 
-                    Log.d("USER-Hash", fldObj.toString());
                     String value= dataSnapshot.getValue(User.class).toString();
 
                     if(userType.equals("photographer")) {
+
                         String userId = fldObj.get("recKeyID").toString();
+
                         arrList.add(value);
                         photographersIDs.add(userId);
                         arrAdp.notifyDataSetChanged();
+
+                        Log.d("180120USER-Hash", arrList.toString());
+
                     }
                 }
                 catch (Exception ex){

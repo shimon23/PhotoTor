@@ -19,10 +19,9 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
     Button logOut;
     private FirebaseAuth mAuth;
     Button Area;
-    TextView tvArea;
     String[] listArea;
     boolean[]checkArea;
-//    ArrayList<Integer> mSlecterdArea =new ArrayList<>();
+    Button myOrders;
 
 
     @Override
@@ -61,6 +60,17 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
             }
         });
 
+        Button myOrders = (Button) findViewById(R.id.incomingOrdersBtn);
+
+        myOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(view.getContext(), myOrders.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
+
+
 
 
 
@@ -76,6 +86,11 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
+
+//        if(view == myOrders){
+//            Intent myIntent = new Intent(view.getContext(), incomingOrders.class);
+//            startActivityForResult(myIntent, 0);
+//        }
 
 
 

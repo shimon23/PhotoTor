@@ -108,13 +108,14 @@ public class getBid extends AppCompatActivity implements View.OnClickListener {
 
         if(view == confrim){
 
+
             getLastOrderID(new MyCallback() {
                 @Override
                 public void onCallback(Object value) {
                     makeOrder(Integer.parseInt(value.toString())+1);
+
                 }
             });
-
 
             dateET.setEnabled(false);
             timeET.setEnabled(false);
@@ -141,6 +142,7 @@ public class getBid extends AppCompatActivity implements View.OnClickListener {
         notes = notesET.getText().toString();
 
         Order bid = new Order(orderID,photographerID,clientID,date,time,eventType,location,notes);
+
 
         final Map<String, Object> dataMap = new HashMap<String, Object>();
         dataMap.put(Integer.toString(orderID), bid.toMap());
@@ -173,12 +175,15 @@ public class getBid extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void getLastOrderID(final MyCallback myCallback){
+
+
+
         dbRef.child("orders").orderByKey().limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     String latestKey = childSnapshot.getKey();
-                    Log.d("180120-id", latestKey);
+
 
                     myCallback.onCallback(latestKey);
 
