@@ -45,6 +45,7 @@ public class getBid extends AppCompatActivity implements View.OnClickListener {
     Spinner eventsTypes;
 
     Button confrim;
+    Button returnToMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class getBid extends AppCompatActivity implements View.OnClickListener {
         notesET = (EditText)findViewById(R.id.notesET);
         eventsTypes = (Spinner) findViewById(R.id.eventsTypesSppiner);
         confrim = (Button) findViewById(R.id.confrimBtn);
+        returnToMenu = (Button) findViewById(R.id.returnBtn);
         clientID = mAuth.getUid();
 
 
@@ -112,6 +114,20 @@ public class getBid extends AppCompatActivity implements View.OnClickListener {
                     makeOrder(Integer.parseInt(value.toString())+1);
                 }
             });
+
+
+            dateET.setEnabled(false);
+            timeET.setEnabled(false);
+            locationET.setEnabled(false);
+            eventsTypes.setEnabled(false);
+            notesET.setEnabled(false);
+            returnToMenu.setVisibility(View.VISIBLE);
+
+        }
+
+        if(view == returnToMenu){
+            Intent intent=new Intent(this,clientMenu.class);
+            startActivity(intent);
 
         }
 

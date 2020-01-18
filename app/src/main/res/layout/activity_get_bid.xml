@@ -77,7 +77,15 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="286dp" />
+            android:layout_height="240dp" />
+
+        <Button
+            android:id="@+id/returnBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="חזרה לתפריט"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/confrimBtn"
@@ -85,5 +93,6 @@
             android:layout_height="wrap_content"
             android:onClick="onClick"
             android:text="אישור" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
