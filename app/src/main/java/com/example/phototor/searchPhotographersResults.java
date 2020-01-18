@@ -1,5 +1,6 @@
 package com.example.phototor;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,7 +12,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +32,9 @@ public class searchPhotographersResults extends AppCompatActivity {
     String location;
     String notes;
     int eventid;
+
+    DatabaseReference dbRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +53,11 @@ public class searchPhotographersResults extends AppCompatActivity {
 
 
         final List<String> keys = new ArrayList<>(photographersID);
+        idsToNames(keys);
+
+
+
+        dbRef = FirebaseDatabase.getInstance().getReference("users");
 
         arrAdp = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, keys);
         lv = (ListView) findViewById(R.id.listView10);
@@ -65,6 +78,8 @@ public class searchPhotographersResults extends AppCompatActivity {
         });
 
 
+
+
     }
 
     public void profileDisplay(String userId) {
@@ -81,4 +96,84 @@ public class searchPhotographersResults extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
+    public List<String> idsToNames(final List<String> ids) {
+
+        final List<String> ans = new ArrayList<>();
+
+        idToName(new MyCallback() {
+            @Override
+            public void onCallback(Object value) {
+                Log.d("170120", "test");
+
+                display(value);
+
+            }
+        } ,ids);
+
+        return ans;
+
+
+    }
+
+    public void display(Object list){
+        arrAdp = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, (List<String>) list);
+        lv = (ListView) findViewById(R.id.listView10);
+        lv.setAdapter(arrAdp);
+
+    }
+
+
+    public void idToName(final MyCallback call,final List<String> ids){
+
+
+
+        dbRef = FirebaseDatabase.getInstance().getReference();
+
+
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                try {
+
+                    List<String> ans = new ArrayList<>();
+
+
+                    for(String id: ids){
+                        Object fieldsObj = new Object();
+                        HashMap fldObj = (HashMap)dataSnapshot.getValue(fieldsObj.getClass());
+                        HashMap results =(HashMap)((HashMap)fldObj.get("users")).get(id);
+
+                        String fullName = results.get("firstName") + " " + results.get("lastName");
+                        ans.add(fullName);
+
+
+                    }
+
+                    call.onCallback(ans);
+
+
+
+                }
+                catch (Exception ex){
+                    Log.d("170120", "error");
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+
+
+
+    }
+
 }

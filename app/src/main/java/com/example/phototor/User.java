@@ -103,7 +103,7 @@ public class User {
     public String toString(){
 
         try {
-            return this.firstName + " " + this.lastName + ", Phone number: " + this.phoneNumber;
+            return this.firstName + " " + this.lastName;
         }
         catch (Exception ex){
             return "null";
