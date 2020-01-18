@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,9 +29,8 @@ import java.util.Map;
 public class myOrders extends AppCompatActivity {
 
     DatabaseReference dbRef;
-    ListView list;
-    ArrayList<String> arrList= new ArrayList<>();
-    ArrayList <String> photographersIDs = new ArrayList<>();
+    ArrayList<String> arrList = new ArrayList<>();
+    ArrayList<String> photographersIDs = new ArrayList<>();
     ArrayAdapter<String> arrAdp;
     ListView lv;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -43,15 +43,15 @@ public class myOrders extends AppCompatActivity {
         dbRef = FirebaseDatabase.getInstance().getReference("users");
 
 
-//        arrAdp = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, arrList);
-//        lv = (ListView) findViewById(R.id.myOrdersLV);
-//        lv.setAdapter(arrAdp);
+        arrAdp = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, arrList);
+        lv = (ListView) findViewById(R.id.myOrdersLV);
+        lv.setAdapter(arrAdp);
 
         getUserOrders(new MyCallback() {
             @Override
             public void onCallback(Object value) {
 
-                HashMap netanel = ((HashMap)value);
+                HashMap netanel = ((HashMap) value);
 
                 arrList = new ArrayList<String>(netanel.keySet());
                 display(arrList);
@@ -60,18 +60,34 @@ public class myOrders extends AppCompatActivity {
             }
         });
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+
+                String orderId = arrList.get(position);
+                displayOrder(orderId);
+
+
+            }
+        });
 
 
     }
 
-    public void display(Object list){
-        Log.d("180120-orders", list.toString());
+    public void displayOrder(String orderID) {
+        Intent intent = new Intent(this, displayOrder.class);
+        intent.putExtra("orderID",orderID);
+        startActivity(intent);
+    }
 
+    public void display(Object list) {
         arrAdp = new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, (List<String>) list);
         lv = (ListView) findViewById(R.id.myOrdersLV);
         lv.setAdapter(arrAdp);
 
     }
+
     public void getUserOrders(final MyCallback call) {
 
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -98,17 +114,11 @@ public class myOrders extends AppCompatActivity {
                     list.add(fldObj);
                     HashMap user = (HashMap) fldObj.get(mAuth.getUid());
 
-//                    Log.d("180120-netanel", myOrders);
-
                     call.onCallback(user.get("myOrders"));
 
-                    }
-                    catch (Exception ex) {
+                } catch (Exception ex) {
 
-                    }
-
-
-
+                }
 
 
             }

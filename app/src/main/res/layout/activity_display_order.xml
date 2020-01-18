@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".displayOrder">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="601dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/orderNumTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="מספר הזמנה"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/photoTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="צלם"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/photoName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="שם הצלם" />
+
+        <TextView
+            android:id="@+id/photoPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="טלפון" />
+
+        <TextView
+            android:id="@+id/clientTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="לקוח"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/clientName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="שם הלקוח" />
+
+        <TextView
+            android:id="@+id/clientPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="טלפון" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="28dp" />
+
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="פרטי ההזמנה"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/orderDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="תאריך האירוע" />
+
+        <TextView
+            android:id="@+id/orderTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="שעת האירוע" />
+
+        <TextView
+            android:id="@+id/locOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="מקום האירוע" />
+
+        <TextView
+            android:id="@+id/notesOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="הערות" />
+
+        <TextView
+            android:id="@+id/typeOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="סוג" />
+
+        <TextView
+            android:id="@+id/statusOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="סטטוס" />
+
+        <TextView
+            android:id="@+id/priceOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="מחיר" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="153dp" />
+
+        <Button
+            android:id="@+id/confrimBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="אשר הזמנה" />
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="בטל הזמנה" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

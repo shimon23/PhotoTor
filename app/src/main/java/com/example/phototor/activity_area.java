@@ -185,7 +185,6 @@ public class activity_area extends AppCompatActivity implements View.OnClickList
 
                         ans = list.get(0).get("myAreas").toString();
 
-                        Log.d("areas", ans);
 
                         call.onCallback(fldObj.get("myAreas"));
 
