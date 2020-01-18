@@ -22,7 +22,7 @@
         <activity android:name=".clientMenu" />
         <activity android:name=".photographerMenu" />
         <activity android:name=".register" />
-        <activity android:name=".incomingOrders" />
+        <activity android:name=".myOrders" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

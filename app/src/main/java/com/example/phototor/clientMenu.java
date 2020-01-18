@@ -14,6 +14,7 @@ public class clientMenu extends AppCompatActivity implements View.OnClickListene
     Button logOut;
     Button photographersList;
     Button search;
+    Button myOrders;
 
 
     @Override
@@ -24,6 +25,7 @@ public class clientMenu extends AppCompatActivity implements View.OnClickListene
         logOut = (Button)findViewById(R.id.logoutBtn);
         photographersList = (Button) findViewById(R.id.photographersListBtn);
         search = (Button) findViewById(R.id.searchBtn);
+        myOrders = (Button) findViewById(R.id.myOrdersBtn);
 
 
 
@@ -46,6 +48,9 @@ public class clientMenu extends AppCompatActivity implements View.OnClickListene
 
         if(view == search ){
             startActivity(new Intent(this, searchPhotographer.class));
+        }
+        if(view == myOrders ){
+            startActivity(new Intent(this, myOrders.class));
         }
     }
 }
