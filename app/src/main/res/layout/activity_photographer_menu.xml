@@ -22,7 +22,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="276dp" />
+            android:layout_height="319dp" />
 
         <Button
             android:id="@+id/mangCalendarBtn"
@@ -57,13 +57,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/webSiteAndSocial" />
-
-        <Button
-            android:id="@+id/logOutBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="@string/disconnect" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

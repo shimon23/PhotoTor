@@ -24,7 +24,6 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
     Button Area;
     String[] listArea;
     boolean[]checkArea;
-    Button myOrders;
 
 
     @Override
@@ -38,7 +37,6 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
         listArea = getResources().getStringArray(R.array.Area);
         checkArea = new boolean[listArea.length];
 
-        logOut = (Button)findViewById(R.id.logOutBtn);
         Button mangeClendar =  findViewById(R.id.mangCalendarBtn);
         mangeClendar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {

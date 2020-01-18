@@ -123,6 +123,7 @@ public class getBid extends AppCompatActivity implements View.OnClickListener {
             eventsTypes.setEnabled(false);
             notesET.setEnabled(false);
             returnToMenu.setVisibility(View.VISIBLE);
+            confrim.setEnabled(false);
 
         }
 
@@ -183,10 +184,7 @@ public class getBid extends AppCompatActivity implements View.OnClickListener {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     String latestKey = childSnapshot.getKey();
-
-
                     myCallback.onCallback(latestKey);
-
                 }
             }
 

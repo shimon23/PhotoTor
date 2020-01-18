@@ -126,7 +126,14 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="153dp" />
+            android:layout_height="106dp" />
+
+        <Button
+            android:id="@+id/priceBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="הצעת מחיר"
+            android:visibility="invisible" />
 
         <Button
             android:id="@+id/confrimBtn"

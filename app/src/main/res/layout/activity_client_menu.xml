@@ -32,7 +32,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="320dp" />
+            android:layout_height="365dp" />
 
         <Button
             android:id="@+id/searchBtn"
@@ -61,11 +61,5 @@
             android:layout_height="wrap_content"
             android:text="Button" />
 
-        <Button
-            android:id="@+id/logoutBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="@string/disconnect" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

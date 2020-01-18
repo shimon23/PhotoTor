@@ -14,7 +14,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class clientMenu extends AppCompatActivity implements View.OnClickListener {
 
-    Button logOut;
     Button photographersList;
     Button search;
     Button myOrders;
@@ -25,7 +24,6 @@ public class clientMenu extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_menu);
 
-        logOut = (Button)findViewById(R.id.logoutBtn);
         photographersList = (Button) findViewById(R.id.photographersListBtn);
         search = (Button) findViewById(R.id.searchBtn);
         myOrders = (Button) findViewById(R.id.myOrdersBtn);
@@ -58,11 +56,6 @@ public class clientMenu extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-
-        if(view==logOut){
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(this, MainActivity.class));
-        }
 
         if(view==photographersList){
             startActivity(new Intent(this, photographersList.class));

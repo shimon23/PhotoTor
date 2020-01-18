@@ -1,8 +1,5 @@
 package com.example.phototor;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +13,7 @@ public class Order {
     String clientID;
     String date;
     String time;
-    String price;
+    int price;
     String status;
     String eventType;
     String location;
@@ -26,8 +23,7 @@ public class Order {
     public Order(int OrderID,String photographerID, String clientID, String date, String time, String eventType, String location, String notes) {
 
 
-
-        this.status = "Waiting for bid";
+        this.status = "מחכה להצעת מחיר";
         this.orderID = OrderID;
         this.photographerID = photographerID;
         this.clientID = clientID;
@@ -36,12 +32,14 @@ public class Order {
         this.eventType = eventType;
         this.location = location;
         this.notes = notes;
+        this.price = 0;
     }
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("orderID", orderID);
         result.put("status", status);
+        result.put("price",price);
 
 
         result.put("photographerID", photographerID);
@@ -84,11 +82,11 @@ public class Order {
         this.time = time;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

@@ -51,9 +51,10 @@ public class myOrders extends AppCompatActivity {
             @Override
             public void onCallback(Object value) {
 
-                HashMap netanel = ((HashMap) value);
+                HashMap orders = ((HashMap) value);
 
-                arrList = new ArrayList<String>(netanel.keySet());
+                arrList = new ArrayList<String>(orders.keySet());
+
                 display(arrList);
 
 
@@ -93,9 +94,6 @@ public class myOrders extends AppCompatActivity {
         dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                String ans = "";
 
                 ArrayList<HashMap<String, Object>> list = new ArrayList<>();
                 if (dataSnapshot == null) {
