@@ -83,6 +83,7 @@
             android:id="@+id/confrimBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClick"
             android:text="אישור" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

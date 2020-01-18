@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.common.util.CollectionUtils;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -76,7 +77,15 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
             searchPhotographer(new MyCallback() {
                 @Override
                 public void onCallback(Object value) {
-                    Log.d("170120", "test");
+
+                    Log.d("180120", value.toString());
+                    if(value==null || value.toString()==null){
+                        Log.d("180120", "test");
+
+                        Toast.makeText(getApplicationContext(), "לא נמצאו תוצאות מתאימות",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
 
                     displayResults(value);
                 }
@@ -140,11 +149,14 @@ public class searchPhotographer extends AppCompatActivity implements View.OnClic
 
                     Log.d("170120-results", intersection.toString());
 
+
                     call.onCallback(intersection);
 
                 }
                 catch (Exception ex){
                     Log.d("170120", "error");
+                    Toast.makeText(getApplicationContext(), "לא נמצאו תוצאות מתאימות",
+                            Toast.LENGTH_SHORT).show();
 
                 }
 

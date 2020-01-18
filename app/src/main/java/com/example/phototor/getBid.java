@@ -3,12 +3,31 @@ package com.example.phototor;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class getBid extends AppCompatActivity {
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class getBid extends AppCompatActivity implements View.OnClickListener {
+
+    FirebaseAuth mAuth;
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+
 
     String area;
     String date;
@@ -17,6 +36,7 @@ public class getBid extends AppCompatActivity {
     String notes;
     String photographerID;
     int eventid;
+    String clientID;
 
     EditText dateET;
     EditText timeET;
@@ -24,16 +44,29 @@ public class getBid extends AppCompatActivity {
     EditText notesET;
     Spinner eventsTypes;
 
+    Button confrim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_bid);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putString("orderID","10000");
+//        editor.apply();
+
+
+
+        mAuth = FirebaseAuth.getInstance();
 
         dateET = (EditText)findViewById(R.id.dateET);
         timeET = (EditText)findViewById(R.id.timeET);
         locationET = (EditText)findViewById(R.id.locationET);
         notesET = (EditText)findViewById(R.id.notesET);
         eventsTypes = (Spinner) findViewById(R.id.eventsTypesSppiner);
+        confrim = (Button) findViewById(R.id.confrimBtn);
+        clientID = mAuth.getUid();
 
 
         Intent intent = getIntent();
@@ -46,10 +79,7 @@ public class getBid extends AppCompatActivity {
         eventid = intent.getExtras().getInt("eventid");
 
 
-
         eventsTypes.setSelection(eventid);
-
-
 
 
         if(date != null){
@@ -69,7 +99,81 @@ public class getBid extends AppCompatActivity {
         }
 
 
+    }
 
+    @Override
+    public void onClick(View view) {
+
+        if(view == confrim){
+
+            getLastOrderID(new MyCallback() {
+                @Override
+                public void onCallback(Object value) {
+                    makeOrder(Integer.parseInt(value.toString())+1);
+                }
+            });
+
+        }
+
+    }
+
+    public void makeOrder(int orderID) {
+        date = dateET.getText().toString();
+        time = timeET.getText().toString();
+        location = locationET.getText().toString();
+        String eventType = eventsTypes.getSelectedItem().toString();
+        notes = notesET.getText().toString();
+
+        Order bid = new Order(orderID,photographerID,clientID,date,time,eventType,location,notes);
+
+        final Map<String, Object> dataMap = new HashMap<String, Object>();
+        dataMap.put(Integer.toString(orderID), bid.toMap());
+
+        updateOrdersTree(orderID,dataMap);
+        updateUserProfile(photographerID,orderID,dataMap);
+        updateUserProfile(clientID,orderID,dataMap);
+
+
+    }
+
+    public void updateOrdersTree(int orderID, Map orderData){
+        dbRef.child("orders").updateChildren(orderData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        });
+    }
+
+    public void updateUserProfile(String userID,int orderID, Map orderData) {
+
+        dbRef.child("users").child(userID).child("myOrders").updateChildren(orderData).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+        });
+
+    }
+
+    public void getLastOrderID(final MyCallback myCallback){
+        dbRef.child("orders").orderByKey().limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    String latestKey = childSnapshot.getKey();
+                    Log.d("180120-id", latestKey);
+
+                    myCallback.onCallback(latestKey);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }
