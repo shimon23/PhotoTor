@@ -2,13 +2,16 @@ package com.example.phototor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,9 +23,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class displayOrder extends AppCompatActivity {
+public class displayOrder extends AppCompatActivity implements View.OnClickListener {
 
-    Button confrim;
+    Button confrimBtn;
     Button cancel;
     Button priceBtn;
 
@@ -43,6 +46,10 @@ public class displayOrder extends AppCompatActivity {
     String orderID;
     String photographerID;
     String clientID;
+
+    Dialog d;
+    Button dialogConfirm;
+    EditText dialogPrice;
 
     DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -73,7 +80,8 @@ public class displayOrder extends AppCompatActivity {
         price = (TextView) findViewById(R.id.priceOrder);
 
         priceBtn = (Button)findViewById(R.id.priceBtn);
-        confrim = (Button)findViewById(R.id.confrimBtn);
+        confrimBtn = (Button)findViewById(R.id.confrimBtn);
+        cancel = (Button)findViewById(R.id.cancelBtn);
 
 
 
@@ -87,24 +95,46 @@ public class displayOrder extends AppCompatActivity {
                 photographerID = dataMap.get("photographerID").toString();
                 clientID = dataMap.get("clientID").toString();
 
-                Log.d("180120-phone",dataMap.toString());
+                String dateStr = "תאריך האירוע:" + " "+ dataMap.get("date").toString();
+                date.setText(dateStr);
 
+                String timeStr = "שעת האירוע:" + " "+ dataMap.get("time").toString();
+                time.setText(timeStr);
 
-                date.setText(dataMap.get("date").toString());
-                time.setText(dataMap.get("time").toString());
-                location.setText(dataMap.get("location").toString());
-                notes.setText(dataMap.get("notes").toString());
-                type.setText(dataMap.get("eventType").toString());
-                status.setText(dataMap.get("status").toString());
-//                price.setText(dataMap.get("price").toString());
+                String locationStr = "מקום האירוע:" + " "+ dataMap.get("location").toString();
+                location.setText(locationStr);
 
-                Log.d("180120-price",mAuth.getUid());
-                Log.d("180120-price",photographerID);
+                String notesStr = "הערות:" + " "+ dataMap.get("notes").toString();
+                notes.setText(notesStr);
 
-                if(status.getText().toString().equals("מחכה להצעת מחיר") && mAuth.getUid().equals(photographerID)){
+                String typeStr = "סוג האירוע:" + " "+ dataMap.get("eventType").toString();
+                type.setText(typeStr);
+
+                String priceStr = "מחיר:" + " "+ dataMap.get("price").toString();
+                price.setText(priceStr);
+
+                String statusStr = "סטטוס הזמנה:" + " "+ dataMap.get("status").toString();
+                status.setText(statusStr);
+
+                if(dataMap.get("status").toString().equals("מחכה להצעת מחיר") && mAuth.getUid().equals(photographerID)){
                     priceBtn.setVisibility(View.VISIBLE);
-                    confrim.setEnabled(false);
+                    confrimBtn.setEnabled(false);
+                }
 
+                if(dataMap.get("status").toString().equals("התקבלה הצעת מחיר") && mAuth.getUid().equals(photographerID)){
+                    confrimBtn.setEnabled(false);
+                }
+
+                if(dataMap.get("status").toString().equals("מבוטל") && mAuth.getUid().equals(photographerID)){
+                    confrimBtn.setEnabled(false);
+                    cancel.setEnabled(false);
+                    price.setVisibility(View.INVISIBLE);
+                }
+
+                if(dataMap.get("status").toString().equals("מאושר")){
+                    confrimBtn.setEnabled(false);
+                    cancel.setEnabled(true);
+                    price.setVisibility(View.INVISIBLE);
                 }
 
 
@@ -256,5 +286,136 @@ public class displayOrder extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void createPriceDialog(){
+
+        d = new Dialog(this);
+        d.setContentView(R.layout.pricedialog);
+        d.setTitle("הצעת מחיר");
+        d.setCancelable(true);
+
+        dialogConfirm = (Button)d.findViewById(R.id.confrimBtn);
+        dialogPrice = (EditText) d.findViewById(R.id.priceET);
+        dialogConfirm.setOnClickListener(this);
+
+        d.show();
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if(view == priceBtn){
+            createPriceDialog();
+        }
+
+        if(view == dialogConfirm){
+            Log.d("180120", "dialog");
+            d.dismiss();
+            priceBtn.setEnabled(false);
+
+            updateOrder(new MyCallback() {
+                @Override
+                public void onCallback(Object value) {
+
+
+                        }
+
+            },"price",dialogPrice.getText().toString());
+
+            updateOrder(new MyCallback() {
+                @Override
+                public void onCallback(Object value) {
+
+
+                }
+
+            },"status","התקבלה הצעת מחיר");
+
+            Intent intent = new Intent(this, myOrders.class);
+            startActivity(intent);
+        }
+
+        if(view == cancel){
+
+            updateOrder(new MyCallback() {
+                @Override
+                public void onCallback(Object value) {
+
+
+                }
+
+            },"status","מבוטל");
+
+            confrimBtn.setEnabled(false);
+            cancel.setEnabled(false);
+            Intent intent = new Intent(this, myOrders.class);
+            startActivity(intent);
+
+        }
+
+        if(view == confrimBtn){
+
+            updateOrder(new MyCallback() {
+                @Override
+                public void onCallback(Object value) {
+
+
+                }
+
+            },"status","מאושר");
+
+            Intent intent = new Intent(this, myOrders.class);
+            startActivity(intent);
+
+        }
+
+    }
+
+    public void updateOrder(final MyCallback call, final String key, final String value){
+
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+                if (dataSnapshot == null) {
+                    call.onCallback("null");
+                }
+
+                Object fieldsObj = new Object();
+                HashMap fldObj;
+
+
+                try {
+
+                    fldObj = (HashMap) dataSnapshot.getValue(fieldsObj.getClass());
+                    HashMap orders = (HashMap) fldObj.get("orders");
+                    HashMap order = (HashMap) orders.get(orderID);
+
+                    order.put(key,value);
+
+                    dbRef.child("orders").child(orderID).updateChildren(order).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                        }
+                    });
+
+                    call.onCallback(order);
+
+
+                } catch (Exception ex) {
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }

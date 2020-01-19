@@ -31,6 +31,14 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/statusOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="סטטוס"
+            android:textSize="24sp" />
+
+        <TextView
             android:id="@+id/photoTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -113,12 +121,6 @@
             android:text="סוג" />
 
         <TextView
-            android:id="@+id/statusOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="סטטוס" />
-
-        <TextView
             android:id="@+id/priceOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -132,6 +134,7 @@
             android:id="@+id/priceBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClick"
             android:text="הצעת מחיר"
             android:visibility="invisible" />
 
@@ -139,12 +142,14 @@
             android:id="@+id/confrimBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClick"
             android:text="אשר הזמנה" />
 
         <Button
             android:id="@+id/cancelBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="onClick"
             android:text="בטל הזמנה" />
 
     </LinearLayout>
