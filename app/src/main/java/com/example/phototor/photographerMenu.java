@@ -24,6 +24,7 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
     Button Area;
     String[] listArea;
     boolean[]checkArea;
+    Button mySites;
 
 
     @Override
@@ -36,6 +37,8 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
 
         listArea = getResources().getStringArray(R.array.Area);
         checkArea = new boolean[listArea.length];
+
+        mySites = (Button)findViewById(R.id.socialNetworksBtn);
 
         Button mangeClendar =  findViewById(R.id.mangCalendarBtn);
         mangeClendar.setOnClickListener(new View.OnClickListener() {
@@ -107,10 +110,10 @@ public class photographerMenu extends AppCompatActivity  implements  AdapterView
             finish();
         }
 
-//        if(view == myOrders){
-//            Intent myIntent = new Intent(view.getContext(), incomingOrders.class);
-//            startActivityForResult(myIntent, 0);
-//        }
+        if(view == mySites){
+            Intent myIntent = new Intent(view.getContext(), mySites.class);
+            startActivityForResult(myIntent, 0);
+        }
 
 
 

@@ -39,7 +39,10 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
     String photographerID;
     int eventid;
 
-    DatabaseReference dbRef;
+    String webSiteTest;
+    String intagramUser;
+
+    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,6 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
         eventid = intent.getExtras().getInt("eventid");
 
         Log.d("170120-netanel", Integer.toString(eventid));
-
 
 
         HashMap photographerData;
@@ -80,7 +82,6 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
         });
 
 
-
     }
 
 
@@ -100,7 +101,7 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
                 String ans = "";
 
                 ArrayList<HashMap<String, Object>> list = new ArrayList<>();
-                if (dataSnapshot == null){
+                if (dataSnapshot == null) {
                     call.onCallback("null");
                 }
 
@@ -110,10 +111,10 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
 
                 DataSnapshot ds = dataSnapshot.child(photographerID);
 
-                try{
+                try {
 
                     Log.d("photoID", photographerID);
-                    fldObj = (HashMap)ds.getValue(fieldsObj.getClass());
+                    fldObj = (HashMap) ds.getValue(fieldsObj.getClass());
                     fldObj.put("recKeyID", ds.getKey());
                     list.add(fldObj);
 
@@ -125,22 +126,21 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
                     mail.setText(fldObj.get("email").toString());
                     phone.setText(fldObj.get("phoneNumber").toString());
                     city.setText(fldObj.get("city").toString());
+                    webSiteTest = fldObj.get("webSite").toString();
+                    intagramUser = fldObj.get("instagram").toString();
 
-
-
-//                        tv = (TextView) findViewById(R.id.textView4);
-//                        tv.setText("welcome " + fldObj.get("city"));
 
                     call.onCallback(ans);
 
-                }catch (Exception ex){
+                } catch (Exception ex) {
 
                 }
 
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled(DatabaseError databaseError) {
+            }
         });
 
 
@@ -149,20 +149,26 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
     @Override
     public void onClick(View view) {
 
-        if(view == dial){
+        if (view == dial) {
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" + phone.getText()));
             startActivity(intent);
         }
 
-        if(view == webSite){
-            Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
-            myWebLink.setData(Uri.parse("http://www.one.co.il"));
-            startActivity(myWebLink);
+        if (view == webSite) {
+
+            Log.d("190120", webSiteTest);
+
+            Uri uri = Uri.parse("http://"+webSiteTest);
+            Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(likeIng);
+
+
+
         }
 
-        if(view == instagram){
-            Uri uri = Uri.parse("http://instagram.com/_u/ynetgram");
+        if (view == instagram) {
+            Uri uri = Uri.parse("http://instagram.com/_u/"+intagramUser);
             Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
 
             likeIng.setPackage("com.instagram.android");
@@ -171,11 +177,11 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
                 startActivity(likeIng);
             } catch (ActivityNotFoundException e) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://instagram.com/ynetgram")));
+                        Uri.parse("http://instagram.com/"+intagramUser)));
             }
         }
 
-        if(view == getBid){
+        if (view == getBid) {
 
             Intent intent = new Intent(this, getBid.class);
             intent.putExtra("id", photographerID);
@@ -190,6 +196,54 @@ public class photographerProfileDisplay extends AppCompatActivity implements Vie
 
         }
 
+    }
+
+    public void displayWebSite(String url) {
+        Log.d("190120-web", url);
+
+        Intent myWebLink = new Intent(android.content.Intent.ACTION_VIEW);
+        myWebLink.setData(Uri.parse(url));
+        startActivity(myWebLink);
+    }
+
+    public void getUserDateByKey(final MyCallback call, final String key) {
+
+        dbRef = FirebaseDatabase.getInstance().getReference();
+
+
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+                if (dataSnapshot == null) {
+                    call.onCallback("null");
+                }
+
+                Object fieldsObj = new Object();
+                HashMap fldObj;
+
+
+                try {
+
+                    fldObj = (HashMap) dataSnapshot.getValue(fieldsObj.getClass());
+                    HashMap users = (HashMap) fldObj.get("users");
+                    HashMap user = (HashMap) users.get(photographerID);
+
+                    call.onCallback(user.get(key));
+
+
+                } catch (Exception ex) {
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }
 
