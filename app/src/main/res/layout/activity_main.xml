@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:background="@drawable/back"
     >
 
     <EditText
@@ -12,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="center"
         android:hint="דואר אלקטרוני"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/enterPass"
@@ -26,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:ems="10"
+        android:gravity="center"
         android:hint="סיסמא"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/loginBtn"
@@ -48,20 +51,21 @@
         android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="84dp"
         android:onClick="onClick"
         android:text="הרשמה"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/welcomeApp"
-        android:layout_width="176dp"
-        android:layout_height="51dp"
-        android:text="ברוך הבא ל PhotoTor"
-        android:textSize="20dp"
+        android:layout_width="286dp"
+        android:layout_height="90dp"
+        android:gravity="center"
+        android:text="PhotoTor"
+        android:textSize="60dp"
         app:layout_constraintBottom_toTopOf="@+id/enterMail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="onClick"
-    tools:context=".register">
+    tools:context=".register"
+    android:background="@drawable/back"
+    >
 
     <EditText
         android:id="@+id/editMail"
